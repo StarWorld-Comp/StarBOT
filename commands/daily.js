@@ -2,8 +2,7 @@ module.exports = [{
   name: "daily",
   type: "interaction",
   prototype: "slash",
-  code: `
-$interactionReply[{newEmbed:{author:Ежедневный бонус:$get[author.icon]}{thumbnail:$authorAvatar}{description:**$username[$authorID]**, вы забрали свои **35** ютиков.}{field:Следующий бонус можно забрать:<t#COLON#$truncate[$sum[$math[$datestamp/1000];43200]]#COLON#R>:false}{color:#2b2d31}{footer:$guildName:$guildIcon}{timestamp}}]
+  code: `$interactionReply[{newEmbed:{author:Ежедневный бонус:$get[author.icon]}{thumbnail:$authorAvatar}{description:**$username[$authorID]**, вы забрали свои **35** ютиков.}{field:Следующий бонус можно забрать:<t#COLON#$truncate[$sum[$math[$datestamp/1000];43200]]#COLON#R>:false}{color:#2b2d31}{footer:$guildName:$guildIcon}{timestamp}}]
 $setUserVar[cash;$sum[$getUserVar[cash;$authorID;$guildID;main];35];$authorID;$guildID;main]
 
 $cooldown[12h;{newEmbed:{color:#f1090b}{description:Вы уже забирали ежедневный бонус, попробуйте
