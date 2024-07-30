@@ -1,0 +1,1 @@
+{"998543334983335956_1162783251241369640":{"value":{"inviter":"998543334983335956","codes":["GybBv7CJZP"],"codeData":{"GybBv7CJZP":{"fake":1,"total":10,"real":9,"leave":0}},"counts":{"fake":1,"total":10,"real":9,"leave":0}},"type":"object","key":"998543334983335956_1162783251241369640"}}

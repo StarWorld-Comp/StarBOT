@@ -1,0 +1,79 @@
+0 verbose cli /usr/bin/node /usr/bin/npm
+1 info using npm@10.7.0
+2 info using node@v20.15.1
+3 silly config:load:file:/usr/lib/node_modules/npm/npmrc
+4 silly config:load:file:/home/container/.npmrc
+5 silly config:load:file:/usr/etc/npmrc
+6 verbose title npm i @aoijs/aoi.music
+7 verbose argv "i" "@aoijs/aoi.music"
+8 verbose logfile logs-max:10 dir:/home/container/.npm/_logs/2024-07-28T05_25_42_207Z-
+9 verbose logfile /home/container/.npm/_logs/2024-07-28T05_25_42_207Z-debug-0.log
+10 silly logfile start cleaning logs, removing 1 files
+11 silly logfile done cleaning log files
+12 silly idealTree buildDeps
+13 silly fetch manifest @aoijs/aoi.music@^1.0.0
+14 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+15 http fetch GET 200 https://registry.npmjs.org/@aoijs%2faoi.music 1054ms (cache miss)
+16 silly placeDep ROOT @aoijs/aoi.music@1.0.1 REPLACE for: StarBOT@5.0.0 want: ^1.0.0
+17 silly fetch manifest youtubei.js@^10.2.0
+18 http fetch GET 200 https://registry.npmjs.org/youtubei.js 10ms (cache hit)
+19 silly placeDep ROOT youtubei.js@10.2.0 OK for: @aoijs/aoi.music@1.0.1 want: ^10.2.0
+20 silly fetch manifest jintr@^2.0.0
+21 silly fetch manifest undici@^5.19.1
+22 http fetch GET 200 https://registry.npmjs.org/undici 12ms (cache hit)
+23 http fetch GET 200 https://registry.npmjs.org/jintr 106ms (cache hit)
+24 silly placeDep ROOT jintr@2.0.0 OK for: youtubei.js@10.2.0 want: ^2.0.0
+25 silly placeDep node_modules/youtubei.js undici@5.28.4 OK for: youtubei.js@10.2.0 want: ^5.19.1
+26 silly fetch manifest acorn@^8.8.0
+27 silly fetch manifest @fastify/busboy@^2.0.0
+28 http fetch GET 200 https://registry.npmjs.org/@fastify%2fbusboy 11ms (cache hit)
+29 http fetch GET 200 https://registry.npmjs.org/acorn 14ms (cache hit)
+30 silly placeDep ROOT acorn@8.12.1 OK for: jintr@2.0.0 want: ^8.8.0
+31 silly placeDep ROOT @fastify/busboy@2.1.1 OK for: undici@5.28.4 want: ^2.0.0
+32 silly reify mark retired [ '/home/container/node_modules/@aoijs/aoi.music' ]
+33 silly reify mark retired [ '/home/container/node_modules/@ffprobe-installer/darwin-arm64' ]
+34 silly reify mark retired [ '/home/container/node_modules/@ffprobe-installer/darwin-x64' ]
+35 silly reify mark retired [ '/home/container/node_modules/@ffprobe-installer/linux-arm' ]
+36 silly reify mark retired [ '/home/container/node_modules/@ffprobe-installer/linux-ia32' ]
+37 silly reify mark retired [ '/home/container/node_modules/@ffprobe-installer/linux-x64' ]
+38 silly reify mark retired [ '/home/container/node_modules/@ffprobe-installer/win32-ia32' ]
+39 silly reify mark retired [ '/home/container/node_modules/@ffprobe-installer/win32-x64' ]
+40 silly reify mark retired [ '/home/container/node_modules/jintr' ]
+41 silly reify mark retired [ '/home/container/node_modules/youtubei.js' ]
+42 silly reify mark retired [ '/home/container/node_modules/@aoijs/aoi.db' ]
+43 silly reify moves {
+43 silly reify   '/home/container/node_modules/@aoijs/aoi.music': '/home/container/node_modules/@aoijs/.aoi.music-64Dre7Gp',
+43 silly reify   '/home/container/node_modules/@ffprobe-installer/darwin-arm64': '/home/container/node_modules/@ffprobe-installer/.darwin-arm64-Y7lHXF1F',
+43 silly reify   '/home/container/node_modules/@ffprobe-installer/darwin-x64': '/home/container/node_modules/@ffprobe-installer/.darwin-x64-6rQwIddO',
+43 silly reify   '/home/container/node_modules/@ffprobe-installer/linux-arm': '/home/container/node_modules/@ffprobe-installer/.linux-arm-MGs9Jhk8',
+43 silly reify   '/home/container/node_modules/@ffprobe-installer/linux-ia32': '/home/container/node_modules/@ffprobe-installer/.linux-ia32-wFzi5Z7S',
+43 silly reify   '/home/container/node_modules/@ffprobe-installer/linux-x64': '/home/container/node_modules/@ffprobe-installer/.linux-x64-HdrHUTe0',
+43 silly reify   '/home/container/node_modules/@ffprobe-installer/win32-ia32': '/home/container/node_modules/@ffprobe-installer/.win32-ia32-T5eqPnaw',
+43 silly reify   '/home/container/node_modules/@ffprobe-installer/win32-x64': '/home/container/node_modules/@ffprobe-installer/.win32-x64-0PKyNieb',
+43 silly reify   '/home/container/node_modules/jintr': '/home/container/node_modules/.jintr-y5gLtTVW',
+43 silly reify   '/home/container/node_modules/youtubei.js': '/home/container/node_modules/.youtubei.js-lNNt6wxF',
+43 silly reify   '/home/container/node_modules/@aoijs/aoi.db': '/home/container/node_modules/@aoijs/.aoi.db-L77tN3wd'
+43 silly reify }
+44 verbose stack Error: ENOTEMPTY: directory not empty, rename '/home/container/node_modules/@aoijs/aoi.music' -> '/home/container/node_modules/@aoijs/.aoi.music-64Dre7Gp'
+44 verbose stack     at async Object.rename (node:internal/fs/promises:782:10)
+44 verbose stack     at async moveFile (/usr/lib/node_modules/npm/node_modules/@npmcli/fs/lib/move-file.js:30:5)
+44 verbose stack     at async Promise.allSettled (index 0)
+44 verbose stack     at async [reifyPackages] (/usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:325:11)
+44 verbose stack     at async Arborist.reify (/usr/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:142:5)
+44 verbose stack     at async Install.exec (/usr/lib/node_modules/npm/lib/commands/install.js:150:5)
+44 verbose stack     at async module.exports (/usr/lib/node_modules/npm/lib/cli/entry.js:74:5)
+45 verbose cwd /home/container
+46 verbose Linux 5.15.0-1032-oracle
+47 verbose node v20.15.1
+48 verbose npm  v10.7.0
+49 error code ENOTEMPTY
+50 error syscall rename
+51 error path /home/container/node_modules/@aoijs/aoi.music
+52 error dest /home/container/node_modules/@aoijs/.aoi.music-64Dre7Gp
+53 error errno -39
+54 error ENOTEMPTY: directory not empty, rename '/home/container/node_modules/@aoijs/aoi.music' -> '/home/container/node_modules/@aoijs/.aoi.music-64Dre7Gp'
+55 verbose exit -39
+56 verbose code -39
+57 silly unfinished npm timer reify 1722144343013
+58 silly unfinished npm timer reify:retireShallow 1722144345105
+59 error A complete log of this run can be found in: /home/container/.npm/_logs/2024-07-28T05_25_42_207Z-debug-0.log

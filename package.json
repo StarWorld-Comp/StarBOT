@@ -1,0 +1,21 @@
+{
+  "name": "StarBOT",
+  "version": "5.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "ShidoKageno",
+  "license": "ISC",
+  "description": "StarBOT Evolution Project.",
+  "dependencies": {
+    "@akarui/aoi.invite": "github:aoijs/aoi.invite",
+    "@aoijs/aoi.music": "^1.0.1",
+    "aoi.js": "github:aoijs/aoi.js",
+    "formidable": "^3.5.1",
+    "npm": "^10.8.2",
+    "superagent": "^9.0.2",
+    "wrench": "^1.5.9"
+  }
+}

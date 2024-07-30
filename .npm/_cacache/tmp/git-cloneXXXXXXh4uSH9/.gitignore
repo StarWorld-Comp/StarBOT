@@ -1,0 +1,15 @@
+#Packages
+/index.js
+/.cache
+/.npm
+/node_modules
+/test
+/changelogs
+/tmp
+/.vscode
+/auth.json
+/cmds
+/cache
+/.MUSIC_CACHE
+/.prettierrc
+.idea
