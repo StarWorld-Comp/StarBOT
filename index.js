@@ -13,7 +13,7 @@ const client = new AoiClient({
     type: "aoi.db",
     db: require("@aoijs/aoi.db"),
     dbType: "KeyValue",
-    tables: ["main"],
+    tables: ["main", "economy"],
     securityKey: "2a745a1c382c2808756487ed36cf3513",
   },
     disableFunctions: ["$clientToken"]
