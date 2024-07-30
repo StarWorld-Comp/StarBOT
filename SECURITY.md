@@ -1,21 +1,18 @@
-# Security Policy
+# Политика безопасности
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Сдесь указаны номера версий которые на данный поддерживают политику безопасности, и поддерживаются автором.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 5.0.x   | :white_check_mark: |
+| 4.x.x   | :x:                |
+| 3.x.x   | :x:                |
+| < 3.0   | :x:                |
 
-## Reporting a Vulnerability
+## Сообщения о ошибках/багах/уязвимостях
 
-Use this section to tell people how to report a vulnerability.
+Сообщайте только о тех ошибках которые вы нашли на поддерживаемых версиях.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+В ином случае ваше репорт будет проигнорирован!
