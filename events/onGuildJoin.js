@@ -3,7 +3,7 @@ module.exports = [{
   type: "guildJoin",
   channel: "$guildSystemChannelID",
   code: `
-$author[YutiBOT;$userAvatar[$clientID]]
+$author[StarBOT;$userAvatar[$clientID]]
 $thumbnail[$userAvatar[$clientID]]
 $description[🖐 Вау, спасибо что добавили меня на свой сервер. Я вас не разочарую, внизу вы сможете ознакомиться с моими возможностями.]
 $addField[🎶 Музыка;Слушай свои любимые песню не выходя из Discord в месте со мной при помощи команды /play;false]
