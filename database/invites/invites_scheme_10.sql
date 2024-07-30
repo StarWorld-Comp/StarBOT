@@ -1,1 +1,0 @@
-{"828575993886933003_1162783251241369640":{"value":{"inviter":"828575993886933003","codes":["fnMXVCgK4a"],"codeData":{"fnMXVCgK4a":{"fake":0,"total":1,"real":1,"leave":0}},"counts":{"fake":0,"total":1,"real":1,"leave":0}},"type":"object","key":"828575993886933003_1162783251241369640"}}

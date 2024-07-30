@@ -1,1 +1,0 @@
-{"1176035353824591893_1162783251241369640":{"value":{"inviter":"1176035353824591893","codes":["eCF52rhV","3NJ3wgN3Yq"],"codeData":{"eCF52rhV":{"fake":0,"total":1,"real":1,"leave":0},"3NJ3wgN3Yq":{"fake":0,"total":1,"real":1,"leave":0}},"counts":{"fake":0,"total":2,"real":2,"leave":0}},"type":"object","key":"1176035353824591893_1162783251241369640"}}
