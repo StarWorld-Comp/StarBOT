@@ -3,11 +3,11 @@ module.exports = [{
     type: "ready",
     channel: "",
     code:
-`$createApplicationCommand[global;math;Вычисляет математическое выражение.;true;false;slash;[
+`$createApplicationCommand[global;skipto;Перейти к указанному треку в очереди.;true;false;slash;[
   {
-    "type": 3,
-    "name": "expression",
-    "description": "Выражение",
+    "type": 4,
+    "name": "index",
+    "description": "Номер трека в очереди",
     "required": true
   }
 ]]
