@@ -7,7 +7,7 @@ module.exports = [{
 $if[$and[$oldMember[removedRoles]!=;$newMember[addedRoles]==]==true]
 $description[Роли участника **$username** (<@$authorID>) были изменены]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;25;**{executor.username}** ({executor.mention})];true]
-$addField[Удалены роли;**$oldMember[removedRoles;\n]**;true]
+$addField[Удалены роли;**$oldMember[removedRoles]**;true]
 $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#01e5d6]
 $addTimestamp
@@ -21,9 +21,9 @@ $addTimestamp
 $endelseif
 $elseif[$and[$oldMember[removedRoles]!=;$newMember[addedRoles]!=]==true]
 $description[Роли участника **$username** (<@$authorID>) были изменены]
-$addField[Удалены роли;**$oldMember[removedRoles;\n]**;true]
+$addField[Удалены роли;**$oldMember[removedRoles]**;true]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;25;**{executor.username}** ({executor.mention})];true]
-$addField[Добавлены роли;**$newMember[addedRoles;\n]**;true]
+$addField[Добавлены роли;**$newMember[addedRoles]**;true]
 $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#01e5d6]
 $addTimestamp
