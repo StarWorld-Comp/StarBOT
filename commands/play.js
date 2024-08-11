@@ -5,11 +5,11 @@ module.exports = [{
   $if: "old",
   code: `
 $if[$hasPlayer==false]
-$playTrack[$slashOption[query];youtube]
+$playTrack[$slashOption[query];soundcloud]
 $deafenUser[$clientID;true]
 $joinVC[$voiceID[$authorID];yes;no;yes;default;no]
 $else
-$playTrack[$slashOption[query];youtube]
+$playTrack[$slashOption[query];soundcloud]
 $endif
 $interactionFollowUp[<:music:1264802104925749379> Трек **$slashOption[query]** - **$username[$authorID]** добавлен в очередь.]
 $interactionDefer[true]
