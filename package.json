@@ -10,12 +10,12 @@
   "license": "ISC",
   "description": "StarBOT Evolution Project.",
   "dependencies": {
-    "@akarui/aoi.invite": "github:aoijs/aoi.invite",
-    "@aoijs/aoi.music": "^1.0.1",
+    "@aoijs/aoi.music": "^1.1.1",
     "aoi.js": "github:aoijs/aoi.js",
     "ffmpeg-static": "^5.2.0",
     "formidable": "^3.5.1",
     "npm": "^10.8.2",
+    "string-progressbar": "^1.0.4",
     "superagent": "^9.0.2",
     "wrench": "^1.5.9"
   }

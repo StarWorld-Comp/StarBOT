@@ -1,6 +1,5 @@
 const { AoiClient, LoadCommands } = require("aoi.js");
 const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter } = require("@aoijs/aoi.music");
-const { InviteManager } = require("@akarui/aoi.invite");
 const { channel } = require("aoi.js/src/events/slashOption");
 
 
@@ -16,7 +15,7 @@ const client = new AoiClient({
     tables: ["main"],
     securityKey: "2a745a1c382c2808756487ed36cf3513",
   },
-    disableFunctions: ["$clientToken"]
+    disableFunctions: ["$clientToken", "$clientPrefixes"]
 });
 
 const voice = new AoiVoice(client, {
@@ -26,9 +25,9 @@ const voice = new AoiVoice(client, {
     youtubePlaylistLimit: -1
   },
   searchOptions: {
-   youtubeAuth: true,
+   youtubeAuth: false,
    youtubegl: "US",
-   youtubeClient: "WEB"
+   youtubeClient: "ANDROID"
   }
 });
 client.status({
@@ -44,7 +43,7 @@ client.status({
     time: 25
 });
 client.status({
-    name: "Секс",
+    name: "на сервере",
     type: "STREAMING",
     url: "https://youtube.com/",
     status: "idle",
@@ -81,6 +80,22 @@ client.command({
     name: "$alwaysExecute",
     $if: "old",
     code: `
+$if[$messageType[$messageID;$channelID]==8]
+$description[Участник **$username[$authorID]** (<@$authorID>) дал нашему проекту буст, Спасибо тебе!\nВсего бустов#COLON# **$guildBoostCount[$guildID]**]
+$addTimestamp
+$endif
+$if[$messageType[$messageID;$channelID]==9]
+$description[Уровень буста сервера был поднят до **1**]
+$addTimestamp
+$endif
+$if[$messageType[$messageID;$channelID]==10]
+$description[Уровень буста сервера был поднят до **2**]
+$addTimestamp
+$endif
+$if[$messageType[$messageID;$channelID]==11]
+$description[Уровень буста сервера был полнят до **3**]
+$addTimestamp
+$endif
 $if[$checkContains[$message;https://discord.gg/;https://dsc.gg/;discord.gg/;dsc.gg/]==true]
 $channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил предупреждение}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Автомодерация#COLON# Приглашения:false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
 $if[$getUserVar[warns;$authorID]==3]
@@ -93,19 +108,14 @@ $deleteCommand
 $endif
 $onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]`
 });
+
 voice.addPlugin(PluginName.Cacher, new Cacher("memory" /* or "disk" */));
 voice.addPlugin(PluginName.Filter, new Filter({
     filterFromStart: false
 })),
 voice.bindExecutor(client.functionManager.interpreter);
+
 const loader = new LoadCommands(client);
-new InviteManager(
-  client,
-  {
-    sk: "643egjo9tr3rg824173fjsbthxjwp4ja",
-  },
-  ["inviteJoin", "inviteLeave"]
-);
 voice.addEvent(PlayerEvents.TrackStart);
 voice.addEvent(PlayerEvents.TrackEnd);
 voice.addEvent(PlayerEvents.QueueEnd);
@@ -113,6 +123,6 @@ voice.addEvent(PlayerEvents.AudioError);
 voice.addEvent(PlayerEvents.TrackPause);
 voice.addEvent(PlayerEvents.TrackResume);
 voice.addEvent(PlayerEvents.QueueStart);
-loader.load(client.cmd, "./commands");
-loader.load(client.cmd, "./events");
-loader.load(voice.cmds, "./voice/");
+loader.load(client.cmd, "./commands/", true);
+loader.load(client.cmd, "./events/", true);
+loader.load(voice.cmds, "./voice/", true);
