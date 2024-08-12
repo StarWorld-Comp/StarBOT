@@ -1,2 +1,3 @@
 node_modules
 .cache/node-gyp/20.15.1/include/node/common.gypi
+.npm
