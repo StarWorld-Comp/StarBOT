@@ -4,7 +4,7 @@ const { channel } = require("aoi.js/src/events/slashOption");
 
 
 const client = new AoiClient({
-  token: "",
+  token: "MTI1ODY0Njk3NDg3MDA2MTE4Nw.GRqG1I.L0JoMiblWBV0zLhViIz4z25BlNODpWaA3pSco8",
   prefix: "!",
   intents: ["MessageContent", "Guilds", "GuildMessages", "GuildPresences", "GuildMessageTyping", "GuildMembers", "GuildWebhooks", "GuildVoiceStates", "GuildBans", "GuildEmojisAndStickers", "GuildInvites", "GuildMessageReactions", "GuildIntegrations", "DirectMessages", "DirectMessageReactions", "DirectMessageTyping", "GuildScheduledEvents"],
   events: ["onMessage", "onInteractionCreate", "onPresenceUpdate", "onTypingStart", "onUserUpdate", "onMembersChunk", "onMemberAvailable", "onMemberUpdate", "onLeave", "onJoin", "onWebhooksUpdate", "onVoiceStateUpdate", "onBanRemove", "onBanAdd", "onStickerUpdate", "onStickerDelete", "onStickerCreate", "onEmojiUpdate", "onEmojiDelete", "onEmojiCreate", "onThreadMembersUpdate", "onThreadMemberUpdate", "onThreadListSync", "onThreadDelete", "onThreadUpdate", "onThreadCreate", "onStageInstanceDelete", "onStageInstanceUpdate", "onStageInstanceCreate", "onChannelPinsUpdate", "onChannelDelete", "onChannelUpdate", "onChannelCreate", "onRoleDelete", "onRoleUpdate", "onRoleCreate", "onGuildUnavailable", "onGuildUpdate", "onGuildLeave", "onGuildJoin", "onInviteDelete", "onInviteCreate", "onReactionRemoveAll", "onReactionRemove", "onReactionAdd", "onMessageDeleteBulk", "onMessageUpdate", "onMessageDelete", "onFunctionError", "onApplicationCommandPermissionsUpdate", "onVariableCreate", "onVariableDelete", "onVariableUpdate"],
@@ -80,6 +80,50 @@ client.command({
     name: "$alwaysExecute",
     $if: "old",
     code: `
+$if[$checkContains[$message;https://discord.gg/;https://dsc.gg/;discord.gg/;dsc.gg/]==true]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил предупреждение}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Автомодерация#COLON# Приглашения:false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$if[$getUserVar[warns;$authorID]==3]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;2h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+$if[$getUserVar[warns;$authorID]==7]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#7\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;5h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#7\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+$if[$getUserVar[warns;$authorID]==12]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#12\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;15h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#12\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+$setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
+$setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
+$deleteCommand
+
+$elseif[$checkContains[$message;шлюха;гей;пидорас;идиот;проститутка;ебал;трахал;насиловал;пидор;хуесос;подсос;очкошник;гандон;сука;гондурас;гондон;еблан;ахуел;блядина;долбаеб;уёб]==true]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил предупреждение}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Автомодерация#COLON# Плохие слова:false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$if[$getUserVar[warns;$authorID]==3]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;2h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+$if[$getUserVar[warns;$authorID]==7]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#7\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;5h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#7\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+$if[$getUserVar[warns;$authorID]==12]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#12\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;24h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#12\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+$setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
+$setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
+$deleteCommand
+$endelseif
+$endif
+$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]`
+});
+
+client.command({
+    name: "$alwaysExecute",
+    $if: "old",
+    code: `
 $if[$messageType[$messageID;$channelID]==8]
 $description[Участник **$username[$authorID]** (<@$authorID>) дал нашему проекту буст, Спасибо тебе!\nВсего бустов#COLON# **$guildBoostCount[$guildID]**]
 $addTimestamp
@@ -95,18 +139,7 @@ $endif
 $if[$messageType[$messageID;$channelID]==11]
 $description[Уровень буста сервера был полнят до **3**]
 $addTimestamp
-$endif
-$if[$checkContains[$message;https://discord.gg/;https://dsc.gg/;discord.gg/;dsc.gg/]==true]
-$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил предупреждение}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Автомодерация#COLON# Приглашения:false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
-$if[$getUserVar[warns;$authorID]==3]
-$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
-$timeoutMember[$guildID;$authorID;2h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`)]
-$endif
-$setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
-$setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
-$deleteCommand
-$endif
-$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]`
+$endif`
 });
 
 voice.addPlugin(PluginName.Cacher, new Cacher("memory" /* or "disk" */));
