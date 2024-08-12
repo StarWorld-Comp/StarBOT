@@ -4,7 +4,7 @@ const { channel } = require("aoi.js/src/events/slashOption");
 
 
 const client = new AoiClient({
-  token: "MTI1ODY0Njk3NDg3MDA2MTE4Nw.GRqG1I.L0JoMiblWBV0zLhViIz4z25BlNODpWaA3pSco8",
+  token: "",
   prefix: "!",
   intents: ["MessageContent", "Guilds", "GuildMessages", "GuildPresences", "GuildMessageTyping", "GuildMembers", "GuildWebhooks", "GuildVoiceStates", "GuildBans", "GuildEmojisAndStickers", "GuildInvites", "GuildMessageReactions", "GuildIntegrations", "DirectMessages", "DirectMessageReactions", "DirectMessageTyping", "GuildScheduledEvents"],
   events: ["onMessage", "onInteractionCreate", "onPresenceUpdate", "onTypingStart", "onUserUpdate", "onMembersChunk", "onMemberAvailable", "onMemberUpdate", "onLeave", "onJoin", "onWebhooksUpdate", "onVoiceStateUpdate", "onBanRemove", "onBanAdd", "onStickerUpdate", "onStickerDelete", "onStickerCreate", "onEmojiUpdate", "onEmojiDelete", "onEmojiCreate", "onThreadMembersUpdate", "onThreadMemberUpdate", "onThreadListSync", "onThreadDelete", "onThreadUpdate", "onThreadCreate", "onStageInstanceDelete", "onStageInstanceUpdate", "onStageInstanceCreate", "onChannelPinsUpdate", "onChannelDelete", "onChannelUpdate", "onChannelCreate", "onRoleDelete", "onRoleUpdate", "onRoleCreate", "onGuildUnavailable", "onGuildUpdate", "onGuildLeave", "onGuildJoin", "onInviteDelete", "onInviteCreate", "onReactionRemoveAll", "onReactionRemove", "onReactionAdd", "onMessageDeleteBulk", "onMessageUpdate", "onMessageDelete", "onFunctionError", "onApplicationCommandPermissionsUpdate", "onVariableCreate", "onVariableDelete", "onVariableUpdate"],
