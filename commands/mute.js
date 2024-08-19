@@ -2,7 +2,7 @@ module.exports = [{
   name: "mute",
   type: "interaction",
   prototype: "slash",
-  code: `$interactionReply[{newEmbed:{author:Тайм-Аут:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Длительность:$slashOption[time]:true}{field:Причина:$get[reason]:false}{field:Наказанный участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}]   $timeoutMember[$guildID;$get[user];$slashOption[time];false;$slashOption[reason]]
+  code: `$interactionReply[{newEmbed:{author:Тайм-Аут:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Длительность:$slashOption[time] (<t#COLON#$truncate[$math[$get[time]/1000]]#COLON#f>):true}{field:Причина:$get[reason]:false}{field:Наказанный участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}]   $let[time;$timeoutMember[$guildID;$get[user];$slashOption[time];true;$slashOption[reason]]]
 
 $if[$isUserDmEnabled[$get[user]]==true;
 $sendDM[{newEmbed:{author:Тайм-Аут:$get[author.icon]}{description:Вам был выдан **Тайм-Аут** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$get[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$get[user];false];]

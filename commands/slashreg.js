@@ -3,13 +3,45 @@ module.exports = [{
     type: "ready",
     channel: "",
     code:
-`$createApplicationCommand[global;skipto;Перейти к указанному треку в очереди.;true;false;slash;[
+    `
+$createApplicationCommand[global;temprole;Назначить временную роль.;true;false;slash;[
+
   {
-    "type": 4,
-    "name": "index",
-    "description": "Номер трека в очереди",
+
+    "type": 6,
+
+    "name": "user",
+
+    "description": "Пользователь",
+
     "required": true
+
+  },
+
+  {
+
+    "type": 8,
+
+    "name": "role",
+
+    "description": "Роль",
+
+    "required": true
+
+  },
+
+  {
+
+    "type": 3,
+
+    "name": "duration",
+
+    "description": "Время",
+
+    "required": true
+
   }
+
 ]]
 $log[Слэш-команда зарегистрирована]`
 }];

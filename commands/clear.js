@@ -4,7 +4,7 @@ module.exports = [{
   prototype: "slash",
   $if: "old",
   code: `$interactionReply[{newEmbed:{author:Очистка:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Кол-во очищено:$slashOption[amount]:true}{field:Канал:<#$get[channel]>:false}{field:Участник:$replaceText[$replaceText[$checkCondition[$get[filter]==everyone];true;Все];false;$slashOption[user]]:false}{color:#2b2d31}{timestamp}}]
-$clear[$get[channel];$slashOption[amount];$get[filter];true]
+$clear[$get[channel];$slashOption[amount];false;false;false;;$get[filter]]
 
 $onlyPerms[managemessages;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
