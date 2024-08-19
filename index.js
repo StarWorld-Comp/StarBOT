@@ -1,6 +1,8 @@
 const { AoiClient, LoadCommands } = require("aoi.js");
 const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter } = require("@aoijs/aoi.music");
 const { channel } = require("aoi.js/src/events/slashOption");
+const { AoiCanvas } = require("@aoijs/aoi.canvas");
+const { pathToFfmpeg } = require('ffmpeg-static');
 
 
 const client = new AoiClient({
@@ -8,26 +10,50 @@ const client = new AoiClient({
   prefix: "!",
   intents: ["MessageContent", "Guilds", "GuildMessages", "GuildPresences", "GuildMessageTyping", "GuildMembers", "GuildWebhooks", "GuildVoiceStates", "GuildBans", "GuildEmojisAndStickers", "GuildInvites", "GuildMessageReactions", "GuildIntegrations", "DirectMessages", "DirectMessageReactions", "DirectMessageTyping", "GuildScheduledEvents"],
   events: ["onMessage", "onInteractionCreate", "onPresenceUpdate", "onTypingStart", "onUserUpdate", "onMembersChunk", "onMemberAvailable", "onMemberUpdate", "onLeave", "onJoin", "onWebhooksUpdate", "onVoiceStateUpdate", "onBanRemove", "onBanAdd", "onStickerUpdate", "onStickerDelete", "onStickerCreate", "onEmojiUpdate", "onEmojiDelete", "onEmojiCreate", "onThreadMembersUpdate", "onThreadMemberUpdate", "onThreadListSync", "onThreadDelete", "onThreadUpdate", "onThreadCreate", "onStageInstanceDelete", "onStageInstanceUpdate", "onStageInstanceCreate", "onChannelPinsUpdate", "onChannelDelete", "onChannelUpdate", "onChannelCreate", "onRoleDelete", "onRoleUpdate", "onRoleCreate", "onGuildUnavailable", "onGuildUpdate", "onGuildLeave", "onGuildJoin", "onInviteDelete", "onInviteCreate", "onReactionRemoveAll", "onReactionRemove", "onReactionAdd", "onMessageDeleteBulk", "onMessageUpdate", "onMessageDelete", "onFunctionError", "onApplicationCommandPermissionsUpdate", "onVariableCreate", "onVariableDelete", "onVariableUpdate"],
+  disableFunctions: ["$clientToken", "$clientPrefixes"],
+  mobilePlatform: false,
+  respondToBots: false,
+  guildOnly: false,
+  cache: {
+        users: 2000,
+        messages: 5000,
+    },
+  disableAoiDB: false,
   database: {
     type: "aoi.db",
     db: require("@aoijs/aoi.db"),
     dbType: "KeyValue",
     tables: ["main"],
-    securityKey: "2a745a1c382c2808756487ed36cf3513",
+    securityKey: "5f160b24ada0471c9283c55285ea3a27",
   },
-    disableFunctions: ["$clientToken", "$clientPrefixes"]
+    suppressAllErrors: false,
+    errorMessage: "Fotal Error!",
+    aoiAutoUpdate: false,
+    aoiWarning: true,
+    aoiLogs: true,
 });
 
+const canvas = new AoiCanvas(client);
+
 const voice = new AoiVoice(client, {
+   devOptions: {
+     debug: false,
+  },
   requestOptions: {
-    offsetTimeout: 0,
+    offsetTimeout: 1500,
     soundcloudLikeTrackLimit: -1,
-    youtubePlaylistLimit: -1
+    youtubePlaylistLimit: -1,
+    spotifyPlaylistLimit: -1
   },
   searchOptions: {
-   youtubeAuth: false,
+   youtubeAuth: true,
+   soundcloudClientId: "",
+   spotifyAuth: {
+       clientId: "befdbab3cd754c4eb6b30ecd94d7d461",
+       clientSecret: "5f160b24ada0471c9283c55285ea3a27"
+   },
    youtubegl: "US",
-   youtubeClient: "ANDROID"
+   youtubeClient: "TV_EMBEDDED"
   }
 });
 client.status({
@@ -74,8 +100,15 @@ client.variables({
   music_thumbnail : "0",
   music_title: "0",
   music_author: "0",
-  music_duration: "0"
+  music_duration: "0",
+  requester: "",
+  url: "",
+  music_authoricon: "",
+  status: "",
+  bonusinvites: "0",
+  page: ""
 });
+
 client.command({
     name: "$alwaysExecute",
     $if: "old",
@@ -98,7 +131,7 @@ $setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
 $setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
 $deleteCommand
 
-$elseif[$checkContains[$message;шлюха;гей;пидорас;идиот;проститутка;ебал;трахал;насиловал;пидор;хуесос;подсос;очкошник;гандон;сука;гондурас;гондон;еблан;ахуел;блядина;долбаеб;уёб]==true]
+$elseif[$checkContains[$message;шлюха;гей;пидорас;идиот;проститутка;ебал;трахал;насиловал;пидор;хуесос;подсос;очкошник;гандон;сука;гондурас;гондон;еблан;ахуел;блядина;долбаеб;уёб;Пиздец;пиздец;Шлюха;хуй;Хуй]==true]
 $channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил предупреждение}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Автомодерация#COLON# Плохие слова:false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
 $if[$getUserVar[warns;$authorID]==3]
 $channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
@@ -142,7 +175,12 @@ $addTimestamp
 $endif`
 });
 
-voice.addPlugin(PluginName.Cacher, new Cacher("memory" /* or "disk" */));
+const { InviteManager } = require("@akarui/aoi.invite");
+const i = new InviteManager(client,{
+    sk: "a-32-characters-long-string-here",
+},['inviteJoin','inviteLeave', 'inviteError']);
+
+voice.addPlugin(PluginName.Cacher, new Cacher("memory"));
 voice.addPlugin(PluginName.Filter, new Filter({
     filterFromStart: false
 })),
@@ -156,6 +194,8 @@ voice.addEvent(PlayerEvents.AudioError);
 voice.addEvent(PlayerEvents.TrackPause);
 voice.addEvent(PlayerEvents.TrackResume);
 voice.addEvent(PlayerEvents.QueueStart);
+voice.addEvent(PlayerEvents.TrackAdd);
 loader.load(client.cmd, "./commands/", true);
 loader.load(client.cmd, "./events/", true);
-loader.load(voice.cmds, "./voice/", true);
+loader.load(voice.cmds, "./musicEvents/", true);
+loader.load(i.cmds, "./inviteEvents/", true);
