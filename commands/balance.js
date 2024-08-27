@@ -3,7 +3,36 @@ module.exports = [{
   type: "interaction",
   prototype: "slash",
   $if: "old",
-  code: `$interactionReply[{newEmbed:{author:Баланс участника $username[$get[user]]:$get[author.icon]}{thumbnail:$userAvatar[$get[user]]}{description:<:money:1264891994694750270> **Наличные:** $numberSeparator[$getUserVar[cash;$get[user]]]\n🏛 **В банке:** $numberSeparator[$getUserVar[bank;$get[user]]]\n🗂 **Общий баланс:** $numberSeparator[$sum[$getUserVar[cash;$get[user]];$getUserVar[bank;$get[user]]]]\n <:next_earn:1264891618268549192> **Доступные награды**\n* Подработка (\`/work\`)\n* Ежедневный бонус (\`/daily\`)\n* Еженедельный бонус (\`/weekly\`)\n* Ежемесячный бонус (\`/monthly\`)}
+  code: `$interactionReply[{newEmbed:{author:Баланс участника $username[$get[user]]:$get[author.icon]}{thumbnail:$userAvatar[$get[user]]}{description:<:money:1264891994694750270> **Наличные:** $numberSeparator[$getUserVar[cash;$get[user]]; ] <#COLON#cheap#COLON#1275714873677975553>\n🏛 **В банке:** $numberSeparator[$getUserVar[bank;$get[user]]; ] <#COLON#cheap#COLON#1275714873677975553>\n🗂 **Общий баланс:** $numberSeparator[$getUserVar[balance;$get[user]]; ] <#COLON#cheap#COLON#1275714873677975553>\n\n<#COLON#level#COLON#1275718216701706271> **Уровень:** $getUserVar[level;$get[user];$guildID] \`\[$getUserVar[xp;$get[user];$guildID]/$getUserVar[nextLevelXP;$get[user];$guildID]\]\`}
+$if[$or[$getCooldownTime[2h;user;work;$findUser[$slashOption[user];true]]==0;$getCooldownTime[7d;user;weekly;$findUser[$slashOption[user];true]]==0;$getCooldownTime[13h;user;daily;$findUser[$slashOption[user];true]]==0;$getCooldownTime[12h;user;timely;$findUser[$slashOption[user];true]]==0;$getCooldownTime[12d;user;monthly;$findUser[$slashOption[user];true]]==0]==true]
+{field:<#COLON#next_earn#COLON#1264891618268549192> Доступные награды:
+$if[$getCooldownTime[2h;user;work;$findUser[$slashOption[user];true]]==0]
+* Подработка (\`/work\`)
+$endif
+$if[$getCooldownTime[12h;user;timely;$findUser[$slashOption[user];true]]==0]
+* Регулярный бонус (\`/timely\`)
+$endif
+$if[$getCooldownTime[13h;user;daily;$findUser[$slashOption[user];true]]==0]
+* Ежедневный бонус (\`/daily\`)
+$endif
+$if[$getCooldownTime[7d;user;weekly;$findUser[$slashOption[user];true]]==0]
+* Еженедельный бонус (\`/weekly\`)
+$endif
+$if[$getCooldownTime[12d;user;monthly;$findUser[$slashOption[user];true]]==0]
+* Ежемесячный бонус (\`/monthly\`)
+$endif:true}
+$endif
+$if[$getUserVar[thiefs;$findUser[$slashOption[user];true];$guildID]!=0]
+{field:<#COLON#thief#COLON#1275715835004063784> Ограбления:За все свое время участник совершил $getUserVar[thiefs;$findUser[$slashOption[user];true];$guildID] ограблений#COLON# $if[$getUserVar[success_thiefs;$findUser[$slashOption[user];true];$guildID]!=0]
+* $getUserVar[success_thiefs;$findUser[$slashOption[user];true];$guildID] успешных
+$endif
+$if[$getUserVar[fail_thiefs;$findUser[$slashOption[user];true];$guildID]!=0]
+* $getUserVar[fail_thiefs;$findUser[$slashOption[user];true];$guildID] провальных
+$endif
+$if[$getUserVar[jail_thiefs;$findUser[$slashOption[user];true];$guildID]!=0]
+* $getUserVar[jail_thiefs;$findUser[$slashOption[user];true];$guildID] ареста
+$endif:true}
+$endif
 {color:#2b2d31}{footer:$guildName:$guildIcon}{timestamp}}]
 $let[user;$findUser[$slashOption[user];true]]
 $let[author.icon;https://cdn.discordapp.com/attachments/1162658570609901644/1245011736730538045/896158535082205255.png?ex=669f0cc9&is=669dbb49&hm=33a1e28ba65985729439a745fb5a5f60f82fde90cdbd776d48080d792c137c5d&]`

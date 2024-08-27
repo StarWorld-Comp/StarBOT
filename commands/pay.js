@@ -4,6 +4,10 @@ module.exports = {
   prototype: "slash",
   code: `$interactionReply[{newEmbed:{author:Перевод участнику:$get[author.icon]}{thumbnail:$userAvatar[$get[user]]}{description:**$username[$authorID]** перевёл **$username[$get[user]]** **$numberSeparator[$get[percent]]** ютиков.}{field:<#COLON#comission#COLON#1245987195064680469> Комиссия:На этом сервере комиссия составляет **5 %**:false}
 {color:#2b2d31}{footer:$guildName:$guildIcon}{timestamp}}]
+$setUserVar[balance;$sum[$getUserVar[cash;$get[user]];$getUserVar[bank;$get[user]]];$get[user];$guildID]
+
+$setUserVar[balance;$sum[$getUserVar[cash;$authorID;$getUserVar[bank;$authorID];$authorID;$guildID]
+
 $setUserVar[cash;$sum[$getUserVar[cash;$get[user]];$get[percent]];$get[user]]
 $setUserVar[cash;$sub[$getUserVar[cash;$authorID];$slashOption[amount]];$authorID]
 
