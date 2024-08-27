@@ -4,7 +4,6 @@ module.exports = [{
     type: "trackStart",
     $if: "old",
     code: `
-$loop[$math[$songInfo[duration]/3750];{"msgID": "$getGuildVar[music_msg]", "channelID": "$channelID"};updatesonginfo]
 $setGuildVar[music_msg;$get[music_msg];$guildID]
 $setGuildVar[url;$songInfo[url];$guildID]
 $setGuildVar[music_author;$songInfo[artist];$guildID]
@@ -38,7 +37,7 @@ $else
 {button::secondary:skip:false:1265938817706102886}
 $endif
 {button::secondary:loop:false:1265939089086091265}}{actionRow:
-{button::secondary:old:false:1265938523027013652}
+{button::secondary:seek:false:1265938523027013652}
 {button::secondary:stop:false:1265938932424769609}
 {button::secondary:-volume:false:1265938464180797481}
 {button::secondary:+volume:false:1265939201300631573}
