@@ -1,7 +1,7 @@
 module.exports = [{
     name: "unreg",
-    type: "default",
+    type: "ready",
     channel: "",
-    code: `$deleteApplicationCommand[global;$getApplicationCommandID[shuffle;global]]
+    code: `$deleteApplicationCommand[global;$getApplicationCommandID[addfilter;global]]
 $log[success]`
 }];
