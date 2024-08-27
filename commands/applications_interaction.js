@@ -113,6 +113,7 @@ $setMessageVar[years;$textInputValue[years];$get[msg.id];main]
 $setMessageVar[fio;$textInputValue[fio];$get[msg.id];main]
 $setMessageVar[bio;$textInputValue[bio];$get[msg.id];main]
 $setMessageVar[vk;$textInputValue[vk_url];$get[msg.id];main]
+$createThread[1265292151374221436;Обсуждение;MAX;public;$get[msg.id];false]
 $let[msg.id;$channelSendMessage[1265292151374221436;{newEmbed:{author:$username[$authorID]:$authorAvatar}{title:Новая заявка на Хелпера}{description:Только что участник **$username[$authorID]** (<@$authorID>) подал заявку.}{field:Статус заявки:\`\`\`На рассмотрении\`\`\`}{field:Данные участника:ФИО#COLON# _$textInputValue[fio]_\nВозраст#COLON# _$textInputValue[years]_\nVK#COLON# _$textInputValue[vk_url]_\nО себе#COLON# $textInputValue[bio]}{field:Документ подтверждающий возраст:Ниже прикреплено фото документа которое участник указал в анкете.}{image:$textInputValue[document]}{footer:ID заявки#COLON# $messageID}{thumbnail:$authorAvatar}}{actionRow:{button:Принять:success:helper-accept}{button:Отклонить:danger:helper-reject}};true]]
 
 $onlyIf[$checkContains[$textInputValue[document];.png;.jpg;.jpeg;.jpe;.gif;.svg;.webp;.jfif;.tiff;.tif]==true;{newEmbed:{color:#f1090b}{description:Не удалось проверить ваш документ, убедитесь что ссылка указанная вами является рабочей и ведёт на фото документа.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
