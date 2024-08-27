@@ -10,5 +10,6 @@ $addField[Удалённое сообщение:;\`\`\`$message\`\`\`;false]
 $footer[Id сообщения: $messageID]
 $color[#ff6d96]
 $addTimestamp
-$onlyIf[$message!=]`
+$onlyIf[$message!=]
+$onlyIf[$isBot[$authorID]!=true]`
 }];

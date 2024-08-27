@@ -19,10 +19,10 @@ $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#01e5d6]
 $addTimestamp
 $endelseif
-$elseif[$and[$oldMember[removedRoles]!=;$newMember[addedRoles]!=]==true]
+$elseif[$and[$oldMember[removedRoles]!=;$newMember[addedRoles]!=;$oldMember[removedRoles]!=$newMember[addedRoles]]==true]
 $description[Роли участника **$username** (<@$authorID>) были изменены]
-$addField[Удалены роли;**$oldMember[removedRoles]**;true]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;25;**{executor.username}** ({executor.mention})];true]
+$addField[Удалены роли;**$oldMember[removedRoles]**;true]
 $addField[Добавлены роли;**$newMember[addedRoles]**;true]
 $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#01e5d6]

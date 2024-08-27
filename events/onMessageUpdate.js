@@ -12,5 +12,7 @@ $footer[Id сообщения: $messageID]
 $color[#60afff]
 $addTimestamp
 $onlyIf[$oldMessage!=]
-$onlyIf[$isBot[authorID]!=true]`
+$onlyIf[$message!=]
+$onlyIf[$message!=$oldMessage]
+$onlyIf[$isBot[$authorID]!=true]`
 }];

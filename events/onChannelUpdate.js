@@ -22,7 +22,7 @@ $endelseif
 $elseif[$newChannel[parentID]!=$oldChannel[parentID]]
 $description[Категория канала **$newChannel[name]** (<@$newChannel[id]>) была изменена]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;11;**{executor.username}** ({executor.mention})];false]
-$addField[Новая категория;$replaceText[$replaceText[$checkCondition[$newChannel[parentName]!=];true;$oldChannel[parentName]];false;ㅤ];true]
+$addField[Новая категория;$replaceText[$replaceText[$checkCondition[$newChannel[parentName]!=];true;$newChannel[parentName]];false;ㅤ];true]
 $addField[Старая категория;$replaceText[$replaceText[$checkCondition[$oldChannel[parentName]!=];true;$oldChannel[parentName]];false;ㅤ];true]
 $footer[Id канала#COLON# $newChannel[id];$guildIcon]
 $addTimestamp
