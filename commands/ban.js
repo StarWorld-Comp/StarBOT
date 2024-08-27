@@ -2,10 +2,14 @@ module.exports = [{
   name: "ban",
   type: "interaction",
   prototype: "slash",
-  code: `$interactionReply[{newEmbed:{author:Блокировка:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Заблокированный участник:$username[$get[user]] (<@$get[user]>):false}{color:$get[platform]}{timestamp}}]
+  $if: "old",
+  code: `$interactionEdit[{newEmbed:{author:Блокировка:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Заблокированный участник:$username[$get[user]] (<@$get[user]>):false}{color:$get[platform]}{timestamp}}]
 $ban[$guildID;$get[user];7;$slashOption[reason]]
-$if[$isUserDmEnabled[$get[user]]==true;
-$sendDM[{newEmbed:{author:Блокировка:$get[author.icon]}{description:Вы были **заблокированы** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$get[reason]}{timestamp}{color:#2b2d31}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$get[user];false];]
+$if[$isUserDmEnabled[$get[user]]==true]
+$sendDM[{newEmbed:{author:Блокировка:$get[author.icon]}{description:Вы были **заблокированы** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$get[reason]}{timestamp}{color:#2b2d31}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$get[user];false]
+$endif
+$wait[1s]
+$interactionReply[Наказываю участника...]
 
 $onlyPerms[banmembers;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
@@ -17,7 +21,7 @@ $onlyIf[$authorID!=$get[user];{newEmbed:{color:#f1090b}{description:Вы не м
 
 $onlyIf[$isBot[$get[user]]!=true;{newEmbed:{color:#f1090b}{description:Вы не можете блокировать ботов.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
-$onlyIf[$charCount[$slashOption[reason]]<=512;{newEmbed:{color:#f1090b}{description:Кол-во символов в поле причина не может превышать 512.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyIf[$charCount[$slashOption[reason]]<=512;{newEmbed:{color:#f1090b}{description:Кол-во символов в поле \'причина\' не может превышать 512.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
 $let[author.icon;https://cdn.discordapp.com/attachments/1162658570077229132/1237712867005038602/999637299488882740.png?ex=663ca56f&is=663b53ef&hm=2677d01915c9ed10931c539e38385b2532c9e82e0302c1ed62a7123671243e42&]
 $let[avatar;$userAvatar[$get[user]]]
