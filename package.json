@@ -1,26 +1,20 @@
 {
-  "name": "StarBOT",
-  "version": "5.0.0",
+  "name": "container",
+  "version": "5.0.2",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "ShidoKageno",
+  "author": "",
   "license": "ISC",
-  "description": "StarBOT Evolution Project.",
+  "description": "",
   "dependencies": {
-    "@akarui/aoi.invite": "github:aoijs/aoi.invite",
-    "@aoijs/aoi.canvas": "^2.0.0",
+    "@aoijs/aoi.db": "^0.0.0",
     "@aoijs/aoi.music": "^1.1.1",
-    "@discordjs/opus": "^0.9.0",
-    "aoi.js": "github:aoijs/aoi.js",
-    "ffmpeg": "^0.0.4",
-    "ffmpeg-static": "^5.2.0",
-    "formidable": "^3.5.1",
-    "npm": "^10.8.2",
-    "string-progressbar": "^1.0.4",
-    "superagent": "^9.0.2",
-    "wrench": "^1.5.9"
+    "aoi.canvas": "github:aoijs/aoi.canvas",
+    "aoi.js": "github:aoijs/aoi.js#functions",
+    "axios": "^1.7.5",
+    "ffmpeg-static": "^5.2.0"
   }
 }
