@@ -15,18 +15,24 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
         type: "interaction",
         prototype: "modal",
         code: `
-$interactionReply[{newEmbed:{description:Вы успешно создали тикет (<#$get[ticket1]>).}{timestamp}};;true;false]
+$editChannel[$get[ticket1];{
+"topic": "$authorID", "reason": "Создан новый тикет", "type": "0", "rateLimitPerUser": "5"}]
 $channelSendMessage[$get[ticket1];{newEmbed:{description:## Панель управления\n\n🚫 - Закрыть тикет.\n🚹 - Добавить участника.\n📛 - Удалить тикет.\n✋️ - Удалить участника.}}{actionRow:{button:🚫:secondary:ticket.close}{button:🚹:secondary:ticket.adduser}
 {button:📛:secondary:ticket.delete}
 {button:✋️:secondary:ticket.remuser}};false]
 $setChannelVar[ticket_user;$authorID;$get[ticket1]]
 $setGuildVar[tickets;$sum[$getGuildVar[tickets];1]]
 $setUserVar[tickets_open;$sub[$getUserVar[tickets_open];1];$authorID]
-$editChannel[$get[ticket1];$default;$default;$default;$authorID;false;$default;$default;$default;$default;$default;5s;$default;$default;Создан новый тикет]
-$setChannelTopic[$channelID;$authorID]
+
+$channelSendMessage[$get[ticket1];{newEmbed:{description:## Новый тикет\n**Только что был создан новый тикет.**\n\n__Автор__\n$username[$authorID] (<@$authorID>)\n__Дата создания__\n<t:$truncate[$math[$datestamp/1000]]:F> (<t:$truncate[$math[$datestamp/1000]]:R>)\n__Причина создания__\n\`\`\`$textInputValue[reason]\`\`\`}{timestamp}{thumbnail:$authorAvatar}};$channelCategoryID;true;{newEmbed:{color:#f1090b}{description:Не удалось создать тикет.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction};false]
+
 $modifyChannelPerms[$get[ticket1];$authorID;+viewchannel;+sendmessages]
 $modifyChannelPerms[$get[ticket1];$guildID;-viewchannel;-sendmessages]
-$let[ticket1;$newTicket[тикет-$get[t];{newEmbed:{description:## Новый тикет\n**Только что был создан новый тикет.**\n\n__Автор__\n$username[$authorID] (<@$authorID>)\n__Дата создания__\n<t:$truncate[$math[$datestamp/1000]]:F> (<t:$truncate[$math[$datestamp/1000]]:R>)\n__Причина создания__\n\`\`\`$textInputValue[reason]\`\`\`}{timestamp}{thumbnail:$authorAvatar}};$channelCategoryID;true;{newEmbed:{color:#f1090b}{description:Не удалось создать тикет.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]]
+
+$interactionEdit[{newEmbed:{description:Вы успешно создали тикет (<#$get[ticket1]>).}{timestamp}}]
+$wait[1s]
+$let[ticket1;$createChannel[$guildID;тикет-$get[t];text;true;$channelCategoryID]]
+$interactionReply[Создаю тикет...;;true]
 $let[t;$replaceText[$replaceText[$checkCondition[$getGuildVar[tickets]<10];true;000$getGuildVar[tickets]];false;$replaceText[$replaceText[$checkCondition[$and[$getGuildVar[tickets]<100;$getGuildVar[tickets]>=10]==true];true;00$getGuildVar[tickets]];false;$replaceText[$replaceText[$checkCondition[$getGuildVar[tickets]>999];true;$getGuildVar[tickets]];false;0$getGuildVar[tickets]]]]]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
     },
@@ -81,15 +87,14 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
            prototype: "modal",
            $if: "old",
            code: `
-$editChannel[$channelID;$default;$default;$default;Закрытый тикет участника $username[$getChannelVar[ticket_user]], модератором $username[$authorID] по причине $textInputValue[reason];false;$default;$default;1243947526986403850;$default;true;$default;$default;$default;Тикет закрыт]
-$channelOverwrites
-$setChannelTopic[$channelID;Закрытый тикет участника $username[$getChannelVar[ticket_user]], модератором $username[$authorID] по причине $textInputValue[reason]]
-$interactionReply[{newEmbed:{description:Этот тикет был закрыт модератором **$username[$authorID]** (<@$authorID>).}{timestamp}}]
+$editChannel[$channelID;{"topic": "Закрытый тикет участника $username[$getChannelVar[ticket_user]], модератором $username[$authorID] по причине $textInputValue[reason]", "parent": "1243947526986403850", "reason": "Тикет закрыт", "type": "0"}]
+$interactionEdit[{newEmbed:{description:Этот тикет был закрыт модератором **$username[$authorID]** (<@$authorID>).}{timestamp}}]
+$wait[1s]
+$interactionReply[Закрываю тикет...]
 $setChannelVar[ticket_close_status;true;$channelID]
 $setUserVar[tickets_open;$sub[$getUserVar[tickets_open];1];$getChannelVar[ticket_user;$channelID]]
 $if[$isUserDmEnabled[$getChannelVar[ticket_user;$channelID]]==true]
 $sendDM[{newEmbed:{author:Тикет:$get[author.icon]}{description:Ваш тикет был **закрыт** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$textInputValue[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$getChannelVar[ticket_user;$channelID];false]
-$else
 $endif
 
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
