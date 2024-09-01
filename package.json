@@ -11,10 +11,14 @@
   "description": "",
   "dependencies": {
     "@aoijs/aoi.db": "^0.0.0",
-    "@aoijs/aoi.music": "^1.1.1",
+    "@aoijs/aoi.invite": "github:Asayukiii/aoi.invite",
+    "@aoijs/aoi.music": "^1.2.1",
+    "@discordjs/opus": "^0.9.0",
     "aoi.canvas": "github:aoijs/aoi.canvas",
-    "aoi.js": "github:aoijs/aoi.js#functions",
+    "aoi.js": "github:aoijs/aoi.js",
     "axios": "^1.7.5",
-    "ffmpeg-static": "^5.2.0"
+    "ffmpeg-static": "^5.2.0",
+    "npm": "^10.8.3",
+    "npm-check-updates": "^17.1.0"
   }
 }
