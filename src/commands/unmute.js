@@ -4,12 +4,13 @@ module.exports = [{
   prototype: "slash",
   $if: "old",
   code: `$interactionEdit[{newEmbed:{author:Снятие наказания:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}]
-$timeoutMember[$guildID;$get[user];0s;false;$slashOption[reason]]
 
 $if[$isUserDmEnabled[$get[user]]==true]
-$sendDM[{newEmbed:{author:Снятие наказания:$get[author.icon]}{description:С вас был снят **Тайм-Аут** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$get[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$sendDM[{newEmbed:{author:Снятие наказания:$get[author.icon1]}{description:С вас был снят **Тайм-Аут** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$get[reason1]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$let[author.icon1;https://cdn.discordapp.com/attachments/1162658570077229132/1237709915464667167/985655815295868939.png?ex=663ca2af&is=663b512f&hm=03929c07dcc6f2d8ba87909ab78ea9a6fc36b54245c4773e05fb6253b5785ebd&]
+$let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];true;Не указана];false;$slashOption[reason]]]
 $endif
-$wait[1s]
+$timeoutMember[$guildID;$get[user];0s;false;$slashOption[reason]]
 $interactionReply[Снимаю наказание...]
 
 $onlyPerms[moderatemembers;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав для снятия наказания этому пользователю.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
