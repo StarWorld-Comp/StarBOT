@@ -4,12 +4,13 @@ module.exports = [{
   prototype: "slash",
   $if: "old",
   code: `$interactionEdit[{newEmbed:{author:Тайм-Аут:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Длительность:$FormatTime[$slashOption[time]] (<t#COLON#$truncate[$math[$get[time]/1000]]#COLON#f>):true}{field:Причина:$get[reason]:false}{field:Наказанный участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}]
-$let[time;$timeoutMember[$guildID;$get[user];$slashOption[time];true;$slashOption[reason]]]
 
-$if[$isUserDmEnabled[$get[user]]==true]
-$sendDM[{newEmbed:{author:Тайм-Аут:$get[author.icon]}{description:Вам был выдан **Тайм-Аут** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$get[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$if[$isUserDmEnabled[$slashOption[user]]==true]
+$sendDM[{newEmbed:{author:Тайм-Аут:$get[author.icon1]}{description:Вам был выдан **Тайм-Аут** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$get[reason1]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];true;Не указана];false;$slashOption[reason]]]
+$let[author.icon1;https://cdn.discordapp.com/attachments/1162658570077229132/1237709915464667167/985655815295868939.png?ex=663ca2af&is=663b512f&hm=03929c07dcc6f2d8ba87909ab78ea9a6fc36b54245c4773e05fb6253b5785ebd&]
 $endif
-$wait[2s]
+$let[time;$timeoutMember[$guildID;$get[user];$slashOption[time];true;$slashOption[reason]]]
 $interactionReply[Наказываю участника...]
 
 $onlyPerms[moderatemembers;{newEmbed:{color:#f1090b}{description:У вас недостаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
