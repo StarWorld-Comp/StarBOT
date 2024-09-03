@@ -4,11 +4,13 @@ module.exports = [{
   prototype: "slash",
   $if: "old",
   code: `$interactionEdit[{newEmbed:{author:Кик:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Кикнутый участник:$username[$get[user]] (<@$get[user]>):false}{color:$get[platform]}{timestamp}}]
-$kick[$guildID;$get[user];$slashOption[reason]]
+
 $if[$isUserDmEnabled[$get[user]]==true]
-$sendDM[{newEmbed:{author:Кик:$get[author.icon]}{description:Вы были **кикнуты** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$get[reason]}{color:#2b2d31}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$sendDM[{newEmbed:{author:Кик:$get[author.icon1]}{description:Вы были **кикнуты** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$get[reason1]}{color:#2b2d31}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];true;Не указана];false;$slashOption[reason]]]
+$let[author.icon1;https://cdn.discordapp.com/attachments/1162658570609901644/1237773132664668302/999637297706315826.png?ex=663cdd8f&is=663b8c0f&hm=d82c870049ee629c01aa3ed629002e0a0e8777138dc4b77a5530b23a24395ebb&]
 $endif
-$wait[2s]
+$kick[$guildID;$get[user];$slashOption[reason]]
 $interactionReply[Выгоняю участника...]
 
 $onlyPerms[kickmembers;{newEmbed:{color:#f1090b}{description:У вас недостаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
