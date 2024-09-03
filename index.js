@@ -1,5 +1,4 @@
 const { AoiClient, LoadCommands, CustomEvent } = require("aoi.js");
-const { InviteManager } = require("@aoijs/aoi.invite");
 const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter } = require("@aoijs/aoi.music");
 const { AoiCanvas } = require("aoi.canvas");
 const config = require("./config.json");
@@ -48,7 +47,7 @@ const voice = new AoiVoice(client, {
        clientSecret: "5f160b24ada0471c9283c55285ea3a27"
    },
    youtubegl: "US",
-   youtubeClient: "ANDROID",
+   youtubeClient: "YTMUSIC",
    youtubeToken: true
    }
 });
@@ -122,10 +121,6 @@ voice.addPlugin(PluginName.Filter, new Filter({
 })),
 voice.bindExecutor(client.functionManager.interpreter);
 
-const i = new InviteManager(client, {
-    sk: "a-32-characters-long-string-here",
-}, ['inviteJoin','inviteLeave']);
-
 const loader = new LoadCommands(client);
 voice.addEvent(PlayerEvents.TrackStart);
 voice.addEvent(PlayerEvents.TrackEnd);
@@ -134,7 +129,6 @@ voice.addEvent(PlayerEvents.AudioError);
 loader.load(client.cmd, "./src/commands/", true);
 loader.load(client.cmd, "./src/events/", true);
 loader.load(voice.cmds, "./src/musicEvents/", true);
-loader.load(i.cmds, "./src/inviteEvents/", true);
 
 const event = new CustomEvent(client);
 
