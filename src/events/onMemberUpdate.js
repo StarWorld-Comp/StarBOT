@@ -31,7 +31,7 @@ $endelseif
 $elseif[$oldMember[nick]!=$newMember[nick]]
 $thumbnail[$authorAvatar]
 $description[Никнейм участника **$username** (<@$authorID>) был изменен]
-$if[$getAuditLogs[$guildID;;1;{executor.id}]!=$authorID]
+$if[$getAuditLogs[$guildID;;1;24;{executor.id}]!=$authorID]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;24;**{executor.username}** ({executor.mention})];true]
 $endif
 $addField[Новый никнейм#COLON#;$newMember[nick];true]
