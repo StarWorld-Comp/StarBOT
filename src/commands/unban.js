@@ -4,11 +4,13 @@ module.exports = [{
   prototype: "slash",
   $if: "old",
   code: `$interactionEdit[{newEmbed:{author:Разблокировка:$get[author.icon]}{thumbnail:$get[avatar]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Разблокированный участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}]
-$unban[$guildID;$get[user];$slashOption[reason]]
+
 $if[$isUserDmEnabled[$get[user]]==true]
-$sendDM[{newEmbed:{author:Разблокировка:$get[author.icon]}{description:Вы были **разблокированы** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$get[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$sendDM[{newEmbed:{author:Разблокировка:$get[author.icon]}{description:Вы были **разблокированы** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$get[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$let[reason;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];true;Не указана];false;$slashOption[reason]]]
+$let[author.icon;https://cdn.discordapp.com/attachments/1162658570077229132/1237712867005038602/999637299488882740.png?ex=663ca56f&is=663b53ef&hm=2677d01915c9ed10931c539e38385b2532c9e82e0302c1ed62a7123671243e42&]
 $endif
-$wait[1s]
+$unban[$guildID;$get[user];$slashOption[reason]]
 $interactionReply[Снимаю наказание...]
 
 $onlyPerms[banmembers;{newEmbed:{color:#f1090b}{description:У вас недостаточно прав для разблокировки.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
