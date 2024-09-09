@@ -11,7 +11,7 @@ $let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];t
 $let[author.icon1;https://cdn.discordapp.com/attachments/1162658570077229132/1237712867005038602/999637299488882740.png?ex=663ca56f&is=663b53ef&hm=2677d01915c9ed10931c539e38385b2532c9e82e0302c1ed62a7123671243e42&]
 $endif
 $ban[$guildID;$get[user];7;$slashOption[reason]]
-$interactionReply[Наказываю участника...]
+$interactionReply[<a:load:1281959260049379348> Наказываю участника...]
 
 $onlyPerms[banmembers;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 

@@ -6,7 +6,7 @@ module.exports = [{
 $interactionEdit[{newEmbed:{description:Результат вычисления выражения \`$slashOption[expression]\`:\n\`\`\`$get[math]\`\`\`}{timestamp}}]
 $let[math;$math[$get[expression]]]
 $wait[1s]
-$interactionReply[Вычисляю выражение...]
+$interactionReply[<a:load:1281959260049379348> Вычисляю выражение...]
 $onlyIf[$checkContains[$get[expression];/;-;+;(;);,;^;*]==true;{newEmbed:{color:#f1090b}{description:Похоже вы ввели некорректное математическое выражение.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $suppressErrors[{newEmbed:{color:#f1090b}{description:Похоже вы ввели некорректное математическое выражение.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[expression;$replaceText[$replaceText[$replaceText[$replaceText[$slashOption[expression];×;*];÷;/];:;/];,;.]]

@@ -12,7 +12,6 @@ $setMessageVar[requester;$songInfo[requester.user.username];$getGuildVar[music_m
 $setMessageVar[thumbnail;$songInfo[thumbnail];$getGuildVar[music_msg;$guildID]]
 $setMessageVar[mustitle;$songInfo[title];$getGuildVar[music_msg;$guildID]]
 $setGuildVar[music_msg;$get[music_msg];$guildID]
-$wait[2s]
 $let[music_msg;$sendMessage[{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}
 {field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
@@ -42,5 +41,6 @@ $endif
 {button::secondary:-volume:false:1265938464180797481}
 {button::secondary:+volume:false:1265939201300631573}
 {button::secondary:queue:false:1273156315212025877}};true]]
-$resetFilter`
+$resetFilter
+$wait[1s]`
 }];

@@ -41,7 +41,6 @@ const voice = new AoiVoice(client, {
   },
   searchOptions: {
    youtubeAuth: true,
-   youtubeToken: true,
    spotifyAuth: {
        clientId: "befdbab3cd754c4eb6b30ecd94d7d461",
        clientSecret: "5f160b24ada0471c9283c55285ea3a27"
@@ -69,6 +68,7 @@ client.status({
     url: "https://twitch.tv/shidokageno_/home",
     time: 20
 });
+
 client.variables({
   level: "1",
   xp: "0",
@@ -81,8 +81,8 @@ client.variables({
   bank: "0",
   user: "",
   document: "none",
-  fio: "none",
-  bio: "none",
+  fio: "",
+  bio: "",
   vk: "none",
   years: "none",
   version: "5.0.3",
@@ -112,7 +112,12 @@ client.variables({
   balance: "0",
   messages: "0",
   voice: "0",
-  xpMulti: "1.5"
+  xpMulti: "1.5",
+  tempRole: "",
+  roleExpire: "0",
+  name: "",
+  age: "",
+  gender: ""
 });
 
 voice.addPlugin(PluginName.Cacher, new Cacher("memory"));

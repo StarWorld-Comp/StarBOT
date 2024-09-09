@@ -11,7 +11,7 @@ $let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];t
 $let[author.icon1;https://cdn.discordapp.com/attachments/1162658570077229132/1237709915464667167/985655815295868939.png?ex=663ca2af&is=663b512f&hm=03929c07dcc6f2d8ba87909ab78ea9a6fc36b54245c4773e05fb6253b5785ebd&]
 $endif
 $let[time;$timeoutMember[$guildID;$get[user];$slashOption[time];true;$slashOption[reason]]]
-$interactionReply[Наказываю участника...]
+$interactionReply[<a:load:1281959260049379348> Наказываю участника...]
 
 $onlyPerms[moderatemembers;{newEmbed:{color:#f1090b}{description:У вас недостаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 

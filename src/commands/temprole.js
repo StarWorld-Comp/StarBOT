@@ -4,8 +4,7 @@ module.exports = [
       type: "interaction",
       prototype: "slash",
       code: `$interactionReply[{newEmbed:{title:Роль успешно выдана}{thumbnail:$get[avatar]}{field:Роль:<@&$slashOption[role]> (ID: $slashOption[role]):false}{field:Время действия:$FormatTime[$slashOption[duration]]:false}{color:#2b2d31}{footer:$username[$get[user]]:$get[avatar]}{timestamp}}]
-$setTimeout[roleTake;$slashOption[duration];{"roleID": "$slashOption[role]",
-"userID": "$get[user]", "channelID": "$channelID", "guildID": "$guildID"}]
+$setTimeout[roleTake;$slashOption[duration];{"roleID": "$slashOption[role]", "userID": "$get[user]", "channelID": "$channelID", "guildID": "$guildID"}]
 $giveRole[$guildID;$get[user];$slashOption[role];Временная роль.]
 
 $onlyIf[$checkContains[$slashOption[duration];m;h;d;mo;s;y;w]==true;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]

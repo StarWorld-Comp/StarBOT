@@ -15,6 +15,7 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
         type: "interaction",
         prototype: "modal",
         code: `
+$interactionEdit[{newEmbed:{description:Вы успешно создали тикет (<#$get[ticket1]>).}{timestamp}}]
 $editChannel[$get[ticket1];{
 "topic": "$authorID", "reason": "Создан новый тикет", "type": "0", "rateLimitPerUser": "5"}]
 $channelSendMessage[$get[ticket1];{newEmbed:{description:## Панель управления\n\n🚫 - Закрыть тикет.\n🚹 - Добавить участника.\n📛 - Удалить тикет.\n✋️ - Удалить участника.}}{actionRow:{button:🚫:secondary:ticket.close}{button:🚹:secondary:ticket.adduser}
@@ -29,10 +30,8 @@ $channelSendMessage[$get[ticket1];{newEmbed:{description:## Новый тике�
 $modifyChannelPerms[$get[ticket1];$authorID;+viewchannel;+sendmessages]
 $modifyChannelPerms[$get[ticket1];$guildID;-viewchannel;-sendmessages]
 
-$interactionEdit[{newEmbed:{description:Вы успешно создали тикет (<#$get[ticket1]>).}{timestamp}}]
-$wait[1s]
 $let[ticket1;$createChannel[$guildID;тикет-$get[t];text;true;$channelCategoryID]]
-$interactionReply[Создаю тикет...;;true]
+$interactionReply[<a:load:1281959260049379348> Создаю тикет...;;true]
 $let[t;$replaceText[$replaceText[$checkCondition[$getGuildVar[tickets]<10];true;000$getGuildVar[tickets]];false;$replaceText[$replaceText[$checkCondition[$and[$getGuildVar[tickets]<100;$getGuildVar[tickets]>=10]==true];true;00$getGuildVar[tickets]];false;$replaceText[$replaceText[$checkCondition[$getGuildVar[tickets]>999];true;$getGuildVar[tickets]];false;0$getGuildVar[tickets]]]]]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
     },

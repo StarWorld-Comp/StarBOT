@@ -8,7 +8,7 @@ $clearQueue
 $stopTrack
 $leaveVC
 $setMessageVar[status_mus;stop;$getGuildVar[music_msg]]
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Статус:Остановлено ($replaceText[$digitalFormat[$songInfo[duration]];00:;]) — $songInfo[requester.user.username]:false}{timestamp}{color:#2e3d9f}}{newEmbed:{title:Остановлено}{description:<@$authorID> принудительно остановил очередь сервера.}{color:#2e3d9f}}]
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Статус:Остановлено ($replaceText[$digitalFormat[$songInfo[duration]];00:;;1]) — $songInfo[requester.user.username]:false}{timestamp}{color:#2e3d9f}}{newEmbed:{title:Остановлено}{description:<@$authorID> принудительно остановил очередь сервера.}{color:#2e3d9f}}]
 $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:Не удалось выпонить, так как очереди/трека нету.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
     },

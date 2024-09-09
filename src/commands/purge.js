@@ -6,7 +6,7 @@ module.exports = [{
   code: `
 $interactionEdit[<:success:1275672606862741556> Успешно архивировано \`$get[count] сообщение\`.;;true]
 $wait[1s]
-$interactionReply[Архивация сообщений...;;true]
+$interactionReply[<a:load:1281959260049379348> Архивация сообщений...;;true]
 $if[$interactionData[options._subcommand]==all]
 $let[count;$clear[$channelID;$slashOption[count];true;false;false]]
 $elseif[$interactionData[options._subcommand]==user]

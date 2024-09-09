@@ -11,7 +11,7 @@ $let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];t
 $let[author.icon1;https://cdn.discordapp.com/attachments/1162658570609901644/1237773132664668302/999637297706315826.png?ex=663cdd8f&is=663b8c0f&hm=d82c870049ee629c01aa3ed629002e0a0e8777138dc4b77a5530b23a24395ebb&]
 $endif
 $kick[$guildID;$get[user];$slashOption[reason]]
-$interactionReply[Выгоняю участника...]
+$interactionReply[<a:load:1281959260049379348> Выгоняю участника...]
 
 $onlyPerms[kickmembers;{newEmbed:{color:#f1090b}{description:У вас недостаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 

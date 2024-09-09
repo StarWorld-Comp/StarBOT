@@ -11,7 +11,7 @@ $let[author.icon1;https://cdn.discordapp.com/attachments/1162658570077229132/123
 $let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];true;Не указана];false;$slashOption[reason]]]
 $endif
 $timeoutMember[$guildID;$get[user];0s;false;$slashOption[reason]]
-$interactionReply[Снимаю наказание...]
+$interactionReply[<a:load:1281959260049379348> Снимаю наказание...]
 
 $onlyPerms[moderatemembers;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав для снятия наказания этому пользователю.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
