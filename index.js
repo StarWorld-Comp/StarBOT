@@ -85,7 +85,7 @@ client.variables({
   bio: "",
   vk: "none",
   years: "none",
-  version: "5.0.3",
+  version: "5.0.4",
   warns: "0",
   app_helper: "on",
   mustitle: "none",
@@ -114,10 +114,12 @@ client.variables({
   voice: "0",
   xpMulti: "1.5",
   tempRole: "",
-  roleExpire: "0",
   name: "",
   age: "",
-  gender: ""
+  gender: "",
+  spam: "",
+  spam_msg: "",
+  spam_msg1: ""
 });
 
 voice.addPlugin(PluginName.Cacher, new Cacher("memory"));

@@ -30,7 +30,6 @@ $suppressErrors
 $endif
 $interactionReply[<a:load:1281959260049379348> Загрузка трека...]
 
-$onlyIf[$voiceID[$authorID]!=;{newEmbed:{color:#f1090b}{description:Присоединитесь к любому голосовому каналу.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
-$let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]
+$onlyIf[$voiceID[$authorID]!=;{newEmbed:{color:#f1090b}{description:Присоединитесь к любому голосовому каналу.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
 $endif`
 }];

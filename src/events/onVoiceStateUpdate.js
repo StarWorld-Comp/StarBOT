@@ -27,18 +27,26 @@ $footer[Id участника: $authorID;$authorAvatar]
 $addTimestamp
 $color[ae84e8]
 $endelseif
-$else
-$if[$voiceid!=]
+$elseif[$and[$oldState[id]==null;$newState[id]!=null]==true]
 $description[Участник **$username[$authorID]** (<@$authorID>) зашёл в голосовой канал **$channelName[$voiceID[$authorID]]** (<#$voiceID>).]
 $footer[Id участника: $authorID;$authorAvatar]
 $addTimestamp
 $color[ae84e8]
-$else
-$description[Участник **$username[$authorID]** (<@$authorID>) покинул голосовой канал.]
+$endelseif
+$elseif[$and[$oldState[id]!=;$newState[id]==]==true]
+$description[Участник **$username[$authorID]** (<@$authorID>) покинул голосовой канал **$channelName[$oldState[id]]** (<#$oldState[id]>).]
 $footer[Id участника: $authorID;$authorAvatar]
 $addTimestamp
 $color[e5aca0]
-$endif
+$endelseif
+$elseif[$and[$oldState[id]!=$newState[id];$oldState[id]!=;$newState[id]!=]==true]
+$description[Участник **$username[$authorID]** (<@$authorID>) перешёл в другой голосовой канал]
+$addField[Предыдущий канал\:;**$channelName[$oldState[id]]** (<#$oldState[id]>);true]
+$addField[Канал;**$channelName[$voiceID[$authorID]]** (<#$voiceID>);true]
+$footer[Id участника: $authorID;$authorAvatar]
+$addTimestamp
+$color[e5aca0]
+$endelseif
 $endif
 $onlyIf[$isBot[$authorID]!=true]`
 }];

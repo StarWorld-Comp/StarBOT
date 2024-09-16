@@ -13,9 +13,8 @@ $color[#7de848]
 $addTimestamp
 $else
 $description[Бот **$username[$authorID]** (<@$authorID>) добавлен на сервер]
-$thumbnail[$authorAvatar]
 $addTimestamp
-$color[#7de848]
+$color[#ffac51]
 $footer[Id бота#COLON# $authorID;$authorAvatar]
 $endif`
 }];

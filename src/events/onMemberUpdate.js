@@ -11,6 +11,7 @@ $addField[Удалены роли;**$oldMember[removedRoles]**;true]
 $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#01e5d6]
 $addTimestamp
+
 $elseif[$and[$newMember[addedRoles]!=;$oldMember[removedRoles]==]==true]
 $description[Роли участника **$username** (<@$authorID>) были изменены]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;25;**{executor.username}** ({executor.mention})];true]
@@ -19,6 +20,7 @@ $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#01e5d6]
 $addTimestamp
 $endelseif
+
 $elseif[$and[$oldMember[removedRoles]!=;$newMember[addedRoles]!=;$oldMember[removedRoles]!=$newMember[addedRoles]]==true]
 $description[Роли участника **$username** (<@$authorID>) были изменены]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;25;**{executor.username}** ({executor.mention})];true]
@@ -28,6 +30,7 @@ $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#01e5d6]
 $addTimestamp
 $endelseif
+
 $elseif[$oldMember[nick]!=$newMember[nick]]
 $thumbnail[$authorAvatar]
 $description[Никнейм участника **$username** (<@$authorID>) был изменен]
@@ -40,7 +43,19 @@ $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#7f9bff]
 $addTimestamp
 $endelseif
-$elseif[$oldMember[removedPermissions]!=]
+
+$elseif[$and[$newMember[newPermissions]!=;$oldMember[removedPermissions]!=]==true]
+$thumbnail[$authorAvatar]
+$description[Разрешения участника **$username** (<@$authorID>) были изменены]
+$addField[Кто изменил;$getAuditLogs[$guildID;;1;24;**{executor.username}** ({executor.mention})];true]
+$addField[Удалённые разрешения#COLON#;$oldMember[removedPermissions];true]
+$addField[Добавленные разрешения#COLON#;$newMember[newPermissions];true]
+$footer[Id участника#COLON# $authorID;$authorAvatar]
+$color[#7f9bff]
+$addTimestamp
+$endelseif
+
+$elseif[$and[$newMember[newPermissions]==;$oldMember[removedPermissions]!=]==true]
 $thumbnail[$authorAvatar]
 $description[Разрешения участника **$username** (<@$authorID>) были изменены]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;24;**{executor.username}** ({executor.mention})];true]
@@ -49,7 +64,8 @@ $footer[Id участника#COLON# $authorID;$authorAvatar]
 $color[#7f9bff]
 $addTimestamp
 $endelseif
-$elseif[$newMember[newPermissions]!=]
+
+$elseif[$and[$newMember[newPermissions]!=;$oldMember[removedPermissions]==]==true]
 $thumbnail[$authorAvatar]
 $description[Разрешения участника **$username** (<@$authorID>) были изменены]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;24;**{executor.username}** ({executor.mention})];true]

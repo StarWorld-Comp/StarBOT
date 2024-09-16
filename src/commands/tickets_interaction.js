@@ -5,7 +5,7 @@ module.exports = [
         prototype: "button",
         code: `$interactionModal[Создать тикет;ticket.reason;
   {actionRow:
-    {textInput:Причина открытия тикета:2:reason:true:У меня возникли проблемы с аккаунтом на сервере...:10:1500}
+    {textInput:Причина открытия тикета:2:reason:true:У меня возникли проблемы с аккаунтом на сервере...:10:1000}
   }]
 $onlyIf[$getUserVar[tickets_open;$authorID]<=2;{newEmbed:{color:#f1090b}{description:Вы превысили лимит одновременно созданых тикетов.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
@@ -16,16 +16,18 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
         prototype: "modal",
         code: `
 $interactionEdit[{newEmbed:{description:Вы успешно создали тикет (<#$get[ticket1]>).}{timestamp}}]
+
+$if[$isUserDmEnabled[$authorID]==true]
+$sendDM[{newEmbed:{author:Тикет}{description:Вы создали новый тикет **$channelName[$get[ticket1]]** (<#$get[ticket1]>).}{field:Причина:$textInputValue[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$authorID;false]
+$endif
+
 $editChannel[$get[ticket1];{
 "topic": "$authorID", "reason": "Создан новый тикет", "type": "0", "rateLimitPerUser": "5"}]
-$channelSendMessage[$get[ticket1];{newEmbed:{description:## Панель управления\n\n🚫 - Закрыть тикет.\n🚹 - Добавить участника.\n📛 - Удалить тикет.\n✋️ - Удалить участника.}}{actionRow:{button:🚫:secondary:ticket.close}{button:🚹:secondary:ticket.adduser}
+$channelSendMessage[$get[ticket1];{newEmbed:{description:## Новый тикет\n**Только что был создан новый тикет.**}{field:Автор:$username[$authorID] (<@$authorID>)}{field:Дата создания:<t\:$truncate[$math[$datestamp/1000]]\:F> (<t\:$truncate[$math[$datestamp/1000]]\:R>)}{field:Причина создания:\`\`\`$textInputValue[reason]\`\`\`}{timestamp}{thumbnail:$authorAvatar}}{newEmbed:{description:## Панель управления}{field:🚫 - Закрыть тикет:-# Закроет текущий билет удаля при этом всех участников кроме администрации, а также переместит этот канал в категорию Модерации.}{field:🚹 - Добавить участника:-# Добавит указанного участника в текущий билет, а также даст ему права писать и видеть сообщения.}{field:📛 - Удалить тикет:-# Удалит текущий билет безвозвратно.}{field:✋️ - Удалить участника:-# Удалит указанного участника из текущего билета.}{thumbnail:https://cdn.discordapp.com/attachments/1162658570077229130/1283426628373971004/icons8--96.png?ex=66e2f3b1&is=66e1a231&hm=f3a88666ac50e6498b7af815b37c5ef654d8450713b537a0a9409dfa0d70a842&}}{actionRow:{button:🚫:secondary:ticket.close}{button:🚹:secondary:ticket.adduser}
 {button:📛:secondary:ticket.delete}
 {button:✋️:secondary:ticket.remuser}};false]
 $setChannelVar[ticket_user;$authorID;$get[ticket1]]
 $setGuildVar[tickets;$sum[$getGuildVar[tickets];1]]
-$setUserVar[tickets_open;$sub[$getUserVar[tickets_open];1];$authorID]
-
-$channelSendMessage[$get[ticket1];{newEmbed:{description:## Новый тикет\n**Только что был создан новый тикет.**\n\n__Автор__\n$username[$authorID] (<@$authorID>)\n__Дата создания__\n<t:$truncate[$math[$datestamp/1000]]:F> (<t:$truncate[$math[$datestamp/1000]]:R>)\n__Причина создания__\n\`\`\`$textInputValue[reason]\`\`\`}{timestamp}{thumbnail:$authorAvatar}};$channelCategoryID;true;{newEmbed:{color:#f1090b}{description:Не удалось создать тикет.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction};false]
 
 $modifyChannelPerms[$get[ticket1];$authorID;+viewchannel;+sendmessages]
 $modifyChannelPerms[$get[ticket1];$guildID;-viewchannel;-sendmessages]
@@ -63,7 +65,7 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
          code: `
 $interactionModal[Добавить участника;ticket.adduser_confirm;
   {actionRow:
-    {textInput:Укажите айди/имя пользователя:1:user:true:10203939920202039 или _example4_:1:30}
+    {textInput:Укажите айди/имя пользователя:1:user:true::1:30}
   }]
 $onlyPerms[administrator;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
@@ -75,7 +77,7 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
            code: `
 $interactionModal[Удалить участника;ticket.remuser_confirm;
   {actionRow:
-    {textInput:Укажите айди/имя пользователя:1:user:true:10292721912983289 или _example5_:1:30}
+    {textInput:Укажите айди/имя пользователя:1:user:true::1:30}
   }]
 $onlyPerms[administrator;{newEmbed:{color:#f1090b}{description:У вас не достаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
@@ -86,16 +88,39 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
            prototype: "modal",
            $if: "old",
            code: `
-$editChannel[$channelID;{"topic": "Закрытый тикет участника $username[$getChannelVar[ticket_user]], модератором $username[$authorID] по причине $textInputValue[reason]", "parent": "1243947526986403850", "reason": "Тикет закрыт", "type": "0"}]
 $interactionEdit[{newEmbed:{description:Этот тикет был закрыт модератором **$username[$authorID]** (<@$authorID>).}{timestamp}}]
-$wait[1s]
-$interactionReply[Закрываю тикет...]
+$editChannel[$channelID;{"topic": "Закрытый тикет участника $username[$getChannelVar[ticket_user]], модератором $username[$authorID] по причине $textInputValue[reason]", "parent": "1243947526986403850", "reason": "Тикет закрыт", "type": "0"}]
 $setChannelVar[ticket_close_status;true;$channelID]
 $setUserVar[tickets_open;$sub[$getUserVar[tickets_open];1];$getChannelVar[ticket_user;$channelID]]
 $if[$isUserDmEnabled[$getChannelVar[ticket_user;$channelID]]==true]
-$sendDM[{newEmbed:{author:Тикет:$get[author.icon]}{description:Ваш тикет был **закрыт** модератором **$username[$authorID]** (<@$authorID>)\n\n**Причина**\n$textInputValue[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$getChannelVar[ticket_user;$channelID];false]
+$sendDM[{newEmbed:{author:Тикет}{description:Ваш тикет был **закрыт** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$textInputValue[reason]}{timestamp}}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$getChannelVar[ticket_user;$channelID];false]
 $endif
+$interactionReply[<a:load:1281959260049379348> Закрываю тикет...]
 
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
-          }
+          },
+          {
+           name: "ticket.remuser_confirm",
+           type: "interaction",
+           prototype: "modal",
+           code: `
+$interactionEdit[{newEmbed:{description:Участник <@$get[user]> был успешно удалён из тикет.}{timestamp}}]
+$modifyChannelPerms[$channelID;$get[user];-sendmessages;-viewchannel]
+$interactionReply[<a:load:1281959260049379348> Удаляю участника...]
+$onlyIf[$get[user]!=$authorID;{newEmbed:{color:#f1090b}{description:Участник не найден.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$let[user;$findMember[$textInputValue[user];true;$guildID]]
+$let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
+         },
+         {
+           name: "ticket.adduser_confirm",
+           type: "interaction",
+           prototype: "modal",
+           code: `
+$interactionEdit[{newEmbed:{description:Участник <@$get[user]> был успешно добавлен в тикет.}{timestamp}}]
+$modifyChannelPerms[$channelID;$get[user];+sendmessages;+viewchannel]
+$interactionReply[<a:load:1281959260049379348> Добавляю участника...]
+$onlyIf[$get[user]!=$authorID;{newEmbed:{color:#f1090b}{description:Участник не найден.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$let[user;$findMember[$textInputValue[user];true;$guildID]]
+$let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
+         }
 ];

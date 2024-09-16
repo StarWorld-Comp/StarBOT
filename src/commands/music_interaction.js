@@ -18,11 +18,11 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
         prototype: "button",
         $if: "old",
         code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<#COLON#play#COLON#1265938979891707976> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:play\:1265938979891707976> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
-{field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
+{field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<\:loop\:1265939089086091265> Очередь];song;<\:loop1\:1273953475918692402> Текущий трек]:true}
 $endif
-{field:Информация:_Просмотров_#COLON# $numberSeparator[$songInfo[views]]\n_Платформа_#COLON# $songInfo[formattedPlatforms]\n_Позиция в очереди_#COLON# $songInfo[position]:false}{color:#2e3d9f}{timestamp}}{actionRow:{selectMenu:bass:Включите трек чтобы выбрать.:1:1:true:{stringInput:Сбросить:reset-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Низкий:low-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Средний:medium-bass:Нажмите, чтобы применить эффект:false}{stringInput:Высокий:hard-bass:Нажмите, чтобы применить эффект:false}}}{actionRow:
+{field:Информация:_Просмотров_\: $numberSeparator[$songInfo[views]]\n_Платформа_\: $songInfo[formattedPlatforms]\n_Позиция в очереди_\: $songInfo[position]:false}{color:#2e3d9f}{timestamp}}{actionRow:{selectMenu:bass:Включите трек чтобы выбрать.:1:1:true:{stringInput:Сбросить:reset-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Низкий:low-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Средний:medium-bass:Нажмите, чтобы применить эффект:false}{stringInput:Высокий:hard-bass:Нажмите, чтобы применить эффект:false}}}{actionRow:
 {button::secondary:shuffle:true:1273953395799228488}
 {button::secondary:previous:true:1265938711149936680}{button::primary:resume:false:1265938979891707976}
 {button::secondary:skip:true:1265938817706102886}
@@ -41,7 +41,8 @@ $endif}
 {button::secondary:-volume:true:1265938464180797481}{button::secondary:+volume:true:1265939201300631573}
 {button::secondary:queue:true:1273156315212025877}}]
 $pauseTrack
-$onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1090b}{description:На данный момент не чего не воспроизводится.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyIf[$playerStatus==playing;{newEmbed:{color:#f1090b}{description:Этот трек уже приостановлен.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:На данный момент не чего не воспроизводится.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
     },
     {
@@ -49,10 +50,10 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
         type: "interaction",
         prototype: "button",
         code: `
-$deleteMessage[$interactionData[message.id];$channelID]
+$interactionDelete
 $wait[1s]
 $skipTrack
-$onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:На данный момент не чего не воспроизводится.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyIf[$or[$hasPlayer==true;$playerStatus==playing;$playerStatus==pause]==true;{newEmbed:{color:#f1090b}{description:На данный момент не чего не воспроизводится.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
      },
      {
@@ -61,11 +62,11 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
          prototype: "button",
          $if: "old",
          code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:pause\:1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
-{field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
+{field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<\:loop\:1265939089086091265> Очередь];song;<\:loop1\:1273953475918692402> Текущий трек]:true}
 $endif
-{field:Информация:_Просмотров_#COLON# $numberSeparator[$songInfo[views]]\n_Платформа_#COLON# $songInfo[formattedPlatforms]\n_Позиция в очереди_#COLON# $songInfo[position]:false}{color:#2e3d9f}{timestamp}}{actionRow:{selectMenu:bass:Выберите нужное:1:1:false:{stringInput:Сбросить:reset-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Низкий:low-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Средний:medium-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Высокий:hard-bass:Нажмите, чтобы применить этот эффект:false}}}{actionRow:
+{field:Информация:_Просмотров_\: $numberSeparator[$songInfo[views]]\n_Платформа_\: $songInfo[formattedPlatforms]\n_Позиция в очереди_\: $songInfo[position]:false}{color:#2e3d9f}{timestamp}}{actionRow:{selectMenu:bass:Выберите нужное:1:1:false:{stringInput:Сбросить:reset-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Низкий:low-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Средний:medium-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Высокий:hard-bass:Нажмите, чтобы применить этот эффект:false}}}{actionRow:
 $if[$queueLength<=1]
 {button::secondary:shuffle:true:1273953395799228488}
 $else
@@ -97,6 +98,7 @@ $endif}
 {button::secondary:-volume:false:1265938464180797481}{button::secondary:+volume:false:1265939201300631573}
 {button::secondary:queue:false:1273156315212025877}}]
 $resumeTrack
+$onlyIf[$playerStatus==paused;{newEmbed:{color:#f1090b}{description:Этот трек уже воспроизводится.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:Не удалось выполнить, так как трек не найден.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
      },

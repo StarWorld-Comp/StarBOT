@@ -10,7 +10,6 @@ $thumbnail[$authorAvatar]
 $color[#ead967]
 $addTimestamp
 $else
-$thumbnail[$authorAvatar]
 $description[Бот **$username[$authorID]** (<@$authorID>) удалён с сервера]
 $footer[Id бота#COLON# $authorID;$authorAvatar]
 $color[#ead967]

@@ -5,25 +5,29 @@ module.exports = [{
     $if: "old",
     code: `
 $if[$interactionData[options._subcommand]==set]
-$interactionReply[<:success:1275672606862741556> Псевдоним участника **$username[$findUser[$slashOption[user];true]]** успешно изменен.]
-$setUserNickname[$findUser[$slashOption[user];true];$slashOption[nick];Изменение псевдонима.]
-$onlyIf[$findUser[$slashOption[user];true]!=$authorID;{newEmbed:{color:#f1090b}{description:Вы не можете изменить свой собственный псевдоним.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
-$onlyIf[$userDisplayName[$findUser[$slashOption[user];true]]!=$userNickname[$guildID;$findUser[$slashOption[user];true];false];{newEmbed:{color:#f1090b}{description:У указанного участника не установлен псевдоним на этом сервере.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$interactionReply[<:success:1275672606862741556> Псевдоним участника **$username[$get[user]]** успешно изменен.]
+$setUserNickname[$get[user];$slashOption[nick];Изменение псевдонима.]
+
+$onlyIf[$get[user]!=$authorID;{newEmbed:{color:#f1090b}{description:Вы не можете изменить свой собственный псевдоним.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
+$onlyIf[$userDisplayName[$get[user]]!=$userNickname[$guildID;$get[user];false];{newEmbed:{color:#f1090b}{description:У указанного участника не установлен псевдоним на этом сервере.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
+$let[user;$findMember[$slashOption[user];true]]
+
 $elseif[$interactionData[options._subcommand]==reset]
-$interactionReply[<:success:1275672606862741556> Псевдоним участника **$username[$findUser[$slashOption[user];true]]** успешно изменен.]
-$setUserNickname[$findUser[$slashOption[user];true];$userDisplayName[$findUser[$slashOption[user];true]];Сброс псевдонима.]
-$onlyIf[$findUser[$slashOption[user];true]!=$authorID;{newEmbed:{color:#f1090b}{description:Вы не можете изменить свой собственный псевдоним.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
-$onlyIf[$userNickname[$guildID;$findUser[$slashOption[user];true];false]!=;{newEmbed:{color:#f1090b}{description:У указанного участника не установлен псевдоним на этом сервере.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$interactionReply[<:success:1275672606862741556> Псевдоним участника **$username[$get[user]]** успешно изменен.]
+$setUserNickname[$get[user];$userDisplayName[$get[user]];Сброс псевдонима.]
+
+$onlyIf[$get[user]!=$authorID;{newEmbed:{color:#f1090b}{description:Вы не можете изменить свой собственный псевдоним.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
+$onlyIf[$userNickname[$guildID;$get[user];false]!=;{newEmbed:{color:#f1090b}{description:У указанного участника не установлен псевдоним на этом сервере.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
+$let[user;$findMember[$slashOption[user];true]]
 $endelseif
+
 $elseif[$interactionData[options._subcommand]==history]
-$interactionReply[{newEmbed:{title:История псевдонимов $username[$findUser[$slashOption[user];true]]}{thumbnail:$userAvatar[$findUser[$slashOption[user];true]]}{description:1. \`Эта функция в разработке...\` (???)\n-# ???}{timestamp}}]
+$interactionReply[{newEmbed:{title:История псевдонимов $username[$get[user]]}{thumbnail:$userAvatar[$get[user]]}{description:1. \`Эта функция в разработке...\` (???)\n-# ???}{timestamp}}]
+$let[user;$findMember[$slashOption[user];true]]
 $endelseif
 $endif
 
-$onlyPerms[changenickname;{newEmbed:{color:#f1090b}{description:У вас недостаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyPerms[changenickname;{newEmbed:{color:#f1090b}{description:У вас недостаточно прав.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
 
-$onlyClientPerms[changenickname;{newEmbed:{color:#f1090b}{description:У меня недостаточно прав.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
-
-$let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]
-`
+$onlyClientPerms[changenickname;{newEmbed:{color:#f1090b}{description:У меня недостаточно прав.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
 }];

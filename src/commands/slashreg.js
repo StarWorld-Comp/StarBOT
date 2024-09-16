@@ -1,14 +1,21 @@
 module.exports = [{
     name: "slashreg",
-    type: "default",
+    type: "ready",
     channel: "",
     code:
     `
-$createApplicationCommand[global;profile;Посмотреть профиль.;true;false;slash;[
+$createApplicationCommand[global;giveaway;Создать розыгрыш.;true;guild;guild;slash;[
   {
-    "type": 6,
-    "name": "user",
-    "description": "Пользователь"
+    "type": 3,
+    "name": "prize",
+    "description": "Награда",
+    "required": true
+  },
+  {
+    "type": 3,
+    "name": "duration",
+    "description": "duration",
+    "required": true
   }
 ]]
 $log[Слэш-команда зарегистрирована]`

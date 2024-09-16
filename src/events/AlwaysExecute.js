@@ -13,7 +13,8 @@ $if[$isBoosting[$authorID;$guildID]==true]
 $setUserVar[xp;$sum[$getUserVar[xp];$random[4;14]]]
 $else
 $setUserVar[xp;$sum[$getUserVar[xp];$random[1;8]]]
-$endif`
+$endif
+$onlyIf[$isDM[$channelID]!=true]`
   },
   {
     name: "$alwaysExecute",
@@ -36,7 +37,8 @@ $addTimestamp
 $endelseif
 $else
 $setUserVar[messages;$sum[$getUserVar[messages;$authorID;$guildID];1];$authorID;$guildID]
-$endif`
+$endif
+$onlyIf[$isDM[$channelID]!=true]`
    },
    {
      name: "$alwaysExecute",
@@ -65,7 +67,8 @@ $setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
 $setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
 $deleteCommand
 $endif
-$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]`
+$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]
+$onlyIf[$isDM[$channelID]!=true]`
     },
     {
      name: "$alwaysExecute",
@@ -93,7 +96,8 @@ $setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
 $setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
 $deleteCommand
 $endif
-$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]`
+$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]
+$onlyIf[$isDM[$channelID]!=true]`
     },
     {
      name: "$alwaysExecute",
@@ -121,6 +125,55 @@ $setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
 $setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
 $deleteCommand
 $endif
-$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]`
-    }
+$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]
+$onlyIf[$isDM[$channelID]!=true]`
+    },
+    {
+        name: "$alwaysExecute",
+        code: `
+$awaitMessages[$channelID;$authorID;5s;everything;spam1;]
+$setUserVar[spam;1]
+$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]
+$onlyIf[$isDM[$channelID]!=true]`
+    },
+    {
+        name: "spam1",
+        type: "awaited",
+        code: `
+$awaitMessages[$channelID;$authorID;5s;everything;spam2;]`
+    },
+    {
+       name: "spam2",
+       type: "awaited",
+       code: `
+$awaitMessages[$channelID;$authorID;5s;everything;spam3;]
+`
+    },
+    {
+       name: "spam3",
+       type: "awaited",
+       $if: "old",
+       code: `$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил предупреждение}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Автомодерация#COLON# Спам:false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+
+$if[$getUserVar[warns;$authorID]==3]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;2h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#3\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+
+$if[$getUserVar[warns;$authorID]==7]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#7\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;5h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#7\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+
+$if[$getUserVar[warns;$authorID]==12]
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:Участник **$username** (<@$authorID>) получил наказание}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{field:Предупреждение:**#$getUserVar[warns;$authorID]**:true}{field:Случай:**#$getGuildVar[warns]**:true}{field:Причина:Тайм-Аут#COLON# Автоматическое действие за придупреждение \`#12\` (случай \`#$getGuildVar[warns;$guildID]\`):false}{footer:Id участника#COLON# $authorID:$authorAvatar}{timestamp}{color:ffcb59}}]
+$timeoutMember[$guildID;$authorID;24h;false;Тайм-Аут: Автоматическое действие за придупреждение \`#12\` (случай \`#$getGuildVar[warns;$guildID]\`)]
+$endif
+
+$setGuildVar[warns;$sum[$getGuildVar[warns;$guildID];1];$guildID]
+$setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
+$deleteCommand
+$onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]
+$onlyIf[$isDM[$channelID]!=true]`
+     }
 ];
