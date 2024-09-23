@@ -14,7 +14,7 @@ $setUserVar[xp;$sum[$getUserVar[xp];$random[4;14]]]
 $else
 $setUserVar[xp;$sum[$getUserVar[xp];$random[1;8]]]
 $endif
-$onlyIf[$isDM[$channelID]!=true]`
+$onlyIf[$guildID!=]`
   },
   {
     name: "$alwaysExecute",
@@ -38,7 +38,7 @@ $endelseif
 $else
 $setUserVar[messages;$sum[$getUserVar[messages;$authorID;$guildID];1];$authorID;$guildID]
 $endif
-$onlyIf[$isDM[$channelID]!=true]`
+$onlyIf[$guildID!=]`
    },
    {
      name: "$alwaysExecute",
@@ -97,7 +97,7 @@ $setUserVar[warns;$sum[$getUserVar[warns;$authorID];1];$authorID]
 $deleteCommand
 $endif
 $onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]
-$onlyIf[$isDM[$channelID]!=true]`
+$onlyIf[$guildID!=]`
     },
     {
      name: "$alwaysExecute",
@@ -132,9 +132,8 @@ $onlyIf[$isDM[$channelID]!=true]`
         name: "$alwaysExecute",
         code: `
 $awaitMessages[$channelID;$authorID;5s;everything;spam1;]
-$setUserVar[spam;1]
 $onlyIf[$hasPerms[$guildID;$authorID;administrator;managemessages;moderatemembers]!=true]
-$onlyIf[$isDM[$channelID]!=true]`
+$onlyIf[$guildID!=]`
     },
     {
         name: "spam1",
