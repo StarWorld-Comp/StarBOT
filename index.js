@@ -85,7 +85,7 @@ client.variables({
   bio: "",
   vk: "none",
   years: "none",
-  version: "5.0.4",
+  version: "5.0.5-DEV",
   warns: "0",
   app_helper: "on",
   mustitle: "none",
@@ -99,7 +99,6 @@ client.variables({
   duration: "",
   requester: "",
   url: "",
-  authoricon: "",
   status: "",
   status_mus: "none",
   page: "",
@@ -113,13 +112,12 @@ client.variables({
   messages: "0",
   voice: "0",
   xpMulti: "1.5",
-  tempRole: "",
   name: "",
   age: "",
   gender: "",
-  spam: "",
-  spam_msg: "",
-  spam_msg1: ""
+  nickname_history: "",
+  temproles: "",
+  hash: "1c9aea5"
 });
 
 voice.addPlugin(PluginName.Cacher, new Cacher("memory"));
@@ -136,14 +134,6 @@ voice.addEvent(PlayerEvents.AudioError);
 loader.load(client.cmd, "./src/commands/", true);
 loader.load(client.cmd, "./src/events/", true);
 loader.load(voice.cmds, "./src/musicEvents/", true);
-
-const event = new CustomEvent(client);
-
-event.command({
-    listen: "log",
-    code: `$log[Hello!] `
-});
-event.listen("log");
 
 client.functionManager.createFunction({
   name: "$FormatTime",

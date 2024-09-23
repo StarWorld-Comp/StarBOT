@@ -4,19 +4,6 @@ module.exports = [{
     channel: "",
     code:
     `
-$createApplicationCommand[global;giveaway;Создать розыгрыш.;true;guild;guild;slash;[
-  {
-    "type": 3,
-    "name": "prize",
-    "description": "Награда",
-    "required": true
-  },
-  {
-    "type": 3,
-    "name": "duration",
-    "description": "duration",
-    "required": true
-  }
-]]
+$createApplicationCommand[global;stop;Принудительно остановить воспроизведение треков.;true;guild;guild;slash]
 $log[Слэш-команда зарегистрирована]`
 }];
