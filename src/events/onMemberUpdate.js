@@ -44,7 +44,7 @@ $color[#7f9bff]
 $addTimestamp
 $endelseif
 
-$elseif[$and[$newMember[newPermissions]!=;$oldMember[removedPermissions]!=]==true]
+$elseif[$and[$newMember[newPermissions]!=;$oldMember[removedPermissions]!=;$newMember[newPermissions]!=$oldMember[removedPermissions]]==true]
 $thumbnail[$authorAvatar]
 $description[Разрешения участника **$username** (<@$authorID>) были изменены]
 $addField[Кто изменил;$getAuditLogs[$guildID;;1;24;**{executor.username}** ({executor.mention})];true]
