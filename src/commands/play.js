@@ -16,7 +16,7 @@ $else
 $let[query;$search[$slashOption[query];youtube;{title}#SEMI#{title};20;#SEMI#]]
 $endif
 $else
-$interactionEdit[<:music:1264885613497159782> Трек **$slashOption[query]** — **$username[$authorID]** добавлен в очередь.]
+$interactionEdit[<:music:1264885613497159782> Трек **$slashOption[query]** добавлен в очередь.]
 $playTrack[$nonEscape[$slashOption[query]];youtube]
 $suppressErrors
 $if[$hasPlayer==false]
