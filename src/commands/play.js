@@ -8,7 +8,7 @@ $if[$isAutocomplete==true]
 $autoCompleteRespond[$nonEscape[$get[query]]]
 $suppressErrors
 $if[$isValidLink[$slashOption[query]]==true]
-$let[query;$slashOption[query]#SEMI#$slashOption[query]
+$let[query;$slashOption[query]#SEMI#$slashOption[query]]
 $endif
 $if[$slashOption[query]==]
 $let[query;укажите название трека или url.#SEMI#track-or-url]
@@ -23,7 +23,7 @@ $if[$hasPlayer==false]
 $joinVC[$voiceID[$authorID];true;false;true;default]
 $endif
 $if[$playerStatus==idle]
-$editMessage[$getGuildVar[music_msg;$guildID];{newEmbed:{author:$getGuildVar[music_author;$guildID]:$getGuildVar[music_authoricon;$guildID]}{title:$getGuildVar[music_title;$guildID]}{url:$getGuildVar[url;$guildID]}{thumbnail:$getGuildVar[music_thumbnail;$guildID]}{field:Статус:Прослушано ($digitalFormat[$getGuildVar[music_duration;$guildID]]) — $getGuildVar[requester;$guildID]:false}{timestamp}{color:#2e3d9f}};$channelID]
+$editMessage[$getGuildVar[music_msg;$guildID];{newEmbed:{author:$getGuildVar[author;$guildID]:$getGuildVar[thumbnail;$guildID]}{title:$getGuildVar[title;$guildID]}{url:$getGuildVar[url;$guildID]}{thumbnail:$getGuildVar[thumbnail;$guildID]}{field:Статус:Прослушано ($digitalFormat[$getGuildVar[duration;$guildID]]) — $getGuildVar[requester;$guildID]:false}{timestamp}{color:#2e3d9f}};$channelID]
 $clearQueue
 $stopTrack
 $suppressErrors
