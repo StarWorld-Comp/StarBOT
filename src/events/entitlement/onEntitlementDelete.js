@@ -1,6 +1,7 @@
 module.exports = [{
-  name: "onStageInstanceCreate",
-  type: "stageInstanceCreate",
+  name: "onEntitlementDelete",
+  type: "entitlementDelete",
   channel: "$getGuildVar[logs;$guildID]",
+  $if: "old",
   code: ``
 }];
