@@ -18,7 +18,7 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
         prototype: "button",
         $if: "old",
         code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:play\:1265938979891707976> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:play\:1265938979891707976> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<\:loop\:1265939089086091265> Очередь];song;<\:loop1\:1273953475918692402> Текущий трек]:true}
 $endif
@@ -58,7 +58,7 @@ $onlyIf[$or[$hasPlayer==true;$playerStatus==playing;$playerStatus==pause]==true;
          prototype: "button",
          $if: "old",
          code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:pause\:1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:pause\:1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<\:loop\:1265939089086091265> Очередь];song;<\:loop1\:1273953475918692402> Текущий трек]:true}
 $endif
@@ -103,7 +103,7 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
          prototype: "button",
          $if: "old",
          code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
 $endif
@@ -148,7 +148,7 @@ $onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1
            prototype: "button",
            $if: "old",
            code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
 $endif
@@ -193,7 +193,7 @@ $onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1
            prototype: "button",
            $if: "old",
            code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=queue]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
 $endif
@@ -244,7 +244,7 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
            prototype: "button",
            $if: "old",
            code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
 $endif
@@ -288,7 +288,7 @@ $onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1
            prototype: "button",
            $if: "old",
            code: `
-$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
 $endif
@@ -441,14 +441,13 @@ $interactionReply[{actionRow:{selectMenu:select-platform:Выберите пла
             type: "awaited",
             $if: "old",
             code: `
-$if[$and[$hasPlayer==true;$playerStatus==playing]==true]
-$if[$and[$songInfo[title]==$awaitData[title];$getGuildVar[music_msg]==$awaitData[msgID];$messageExists[$awaitData[msgID];$awaitData[channelID]]==true]==true]
-$editMessage[$awaitData[msgID];{newEmbed:{author:$songInfo[artist]:$songInfo[artistAvatar]}{title:$songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+$if[$and[$hasPlayer==true;$playerStatus==playing;$getGuildVar[music_msg]==$awaitData[msgID]]==true]
+$editMessage[$awaitData[msgID];{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:pause\:1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
-{field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
+{field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<\:loop\:1265939089086091265> Очередь];song;<\:loop1\:1273953475918692402> Текущий трек]:true}
 $endif
-{field:Информация:_Просмотров_#COLON# $numberSeparator[$songInfo[views]]\n_Платформа_#COLON# $songInfo[formattedPlatforms]\n_Позиция в очереди_#COLON# $songInfo[position]:false}{color:#2e3d9f}{timestamp}}{actionRow:{selectMenu:bass:Выберите нужное:1:1:false:{stringInput:Сбросить:reset-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Низкий:low-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Средний:medium-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Высокий:hard-bass:Нажмите, чтобы применить этот эффект:false}}}{actionRow:
-$if[$queueLength<=1]
+{field:Информация:_Просмотров_\: $numberSeparator[$songInfo[views]]\n_Платформа_\: $songInfo[formattedPlatforms]\n_Позиция в очереди_\: $songInfo[position]:false}{color:#2e3d9f}{timestamp}}{actionRow:{selectMenu:bass:Выберите нужное:1:1:false:{stringInput:Сбросить:reset-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Низкий:low-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Средний:medium-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Высокий:hard-bass:Нажмите, чтобы применить этот эффект:false}}}{actionRow:
+$if[$queueLength<=2]
 {button::secondary:shuffle:true:1273953395799228488}
 $else
 {button::secondary:shuffle:false:1273953395799228488}
@@ -478,15 +477,49 @@ $endif}
 {button::secondary:stop:false:1265938932424769609}
 {button::secondary:-volume:false:1265938464180797481}{button::secondary:+volume:false:1265939201300631573}
 {button::secondary:queue:false:1273156315212025877}};$awaitData[channelID]]
-$endif
-$endif
-$suppressErrors
-$wait[15s]
-
 $onlyIf[$and[$hasPlayer==true;$playerStatus==playing]==true]
 $onlyIf[$getGuildVar[music_msg]==$awaitData[msgID]]
 $onlyIf[$messageExists[$awaitData[msgID];$awaitData[channelID]]==true]
-$suppressErrors`
+$suppressErrors
+
+$elseif[$and[$hasPlayer==true;$playerStatus==paused;$getGuildVar[music_msg]==$awaitData[msgID]]==true]
+$editMessage[$awaitData[msgID];{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:play\:1265938979891707976> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
+$if[$loopStatus!=none]
+{field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<\:loop\:1265939089086091265> Очередь];song;<\:loop1\:1273953475918692402> Текущий трек]:true}
+$endif
+{field:Информация:_Просмотров_\: $numberSeparator[$songInfo[views]]\n_Платформа_\: $songInfo[formattedPlatforms]\n_Позиция в очереди_\: $songInfo[position]:false}{color:#2e3d9f}{timestamp}}{actionRow:{selectMenu:bass:Включите трек чтобы выбрать.:1:1:true:{stringInput:Сбросить:reset-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Низкий:low-bass:Нажмите, чтобы применить этот эффект:false}{stringInput:Средний:medium-bass:Нажмите, чтобы применить эффект:false}{stringInput:Высокий:hard-bass:Нажмите, чтобы применить эффект:false}}}{actionRow:
+{button::secondary:shuffle:true:1273953395799228488}
+{button::secondary:previous:true:1265938711149936680}{button::primary:resume:false:1265938979891707976}
+{button::secondary:skip:true:1265938817706102886}
+$if[$loopStatus==none]
+{button::secondary:loop:true:1265939089086091265}
+$elseif[$loopStatus==song]
+{button::secondary:loop:true:1273953475918692402}
+$endelseif
+$elseif[$loopStatus==queue]
+{button::primary:loop:true:1265939089086091265}
+$endelseif
+$endif}
+{actionRow:
+{button::secondary:seek:true:1265938523027013652}
+{button::secondary:stop:true:1265938932424769609}
+{button::secondary:-volume:true:1265938464180797481}{button::secondary:+volume:true:1265939201300631573}
+{button::secondary:queue:true:1273156315212025877}};$awaitData[channelID]]
+$onlyIf[$and[$hasPlayer==true;$playerStatus==playing]==true]
+$onlyIf[$getGuildVar[music_msg]==$awaitData[msgID]]
+$onlyIf[$messageExists[$awaitData[msgID];$awaitData[channelID]]==true]
+$suppressErrors
+$endelseif
+$endif
+$onlyIf[$and[$hasPlayer==true;$playerStatus==playing]==true]
+$onlyIf[$getGuildVar[music_msg]==$awaitData[msgID]]
+$onlyIf[$messageExists[$awaitData[msgID];$awaitData[channelID]]==true]
+$wait[14s]
+$suppressErrors
+
+$onlyIf[$and[$hasPlayer==true;$playerStatus==playing]==true]
+$onlyIf[$getGuildVar[music_msg]==$awaitData[msgID]]
+$onlyIf[$messageExists[$awaitData[msgID];$awaitData[channelID]]==true]`
         },
         {
           name: "queue",

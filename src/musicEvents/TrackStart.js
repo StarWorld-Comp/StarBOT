@@ -12,7 +12,7 @@ $setMessageVar[thumbnail;$songInfo[thumbnail];$getGuildVar[music_msg;$guildID]]
 $setMessageVar[mustitle;$songInfo[title];$getGuildVar[music_msg;$guildID]]
 $setGuildVar[music_msg;$get[music_msg];$guildID]
 $let[music_msg;$sendMessage[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}
-{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
+{field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<:loop:1265939089086091265> Очередь];song;<:loop1:1273953475918692402> Текущий трек]:true}
 $endif
@@ -41,5 +41,6 @@ $endif
 {button::secondary:+volume:false:1265939201300631573}
 {button::secondary:queue:false:1273156315212025877}};true]]
 $resetFilter
+$suppressErrors
 $wait[1s]`
 }];
