@@ -3,16 +3,7 @@ module.exports = [{
   type: "messageUpdate",
   channel: "$getGuildVar[logs;$guildID]",
   $if: "old",
-  code: `$description[[Сообщение]($messageURL[$messageID;$channelID]) было отредактировано]
-$addField[Канал;**$channelName[$channelID]** (<#$channelID>);true]
-$addField[Автор;**$username[$authorID]** (<@$authorID>);true]
-$addField[Новое содержимое:;\`\`\`$message\`\`\`;false]
-$addField[Старое содержимое:;\`\`\`$oldMessage\`\`\`;false]
-$footer[Id сообщения: $messageID]
-$color[#60afff]
-$addTimestamp
-$onlyIf[$oldMessage!=]
-$onlyIf[$message!=]
-$onlyIf[$message!=$oldMessage]
-$onlyIf[$isBot[$authorID]!=true]`
+  code: `
+$channelSendMessage[$getGuildVar[logs;$guildID];{newEmbed:{description:[Сообщение]($messageURL[$messageID;$channelID]) было отредактировано}{field:Старое содержимое#COLON#:\`\`\`$oldMessage\`\`\`:false}{field:Новое содержимое#COLON#:\`\`\`$message\`\`\`:false}{field:Автор:**$username[$authorID]** (<@$authorID>):true}{field:Канал:**$channelName[$channelID]** (<#$channelID>):true}{footer:Id сообщения#COLON# $messageID}{color:#60afff}{timestamp}}]
+$onlyIf[$oldMessage!=&&$message!=&&$message!=$oldMessage&&$isBot[$authorID]!=true]`
 }];
