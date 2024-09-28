@@ -5,7 +5,7 @@ module.exports = [{
   $if: "old",
   code: `$interactionEdit[{newEmbed:{author:Блокировка:attachment://ban.png}{thumbnail:$userAvatar[$get[user]]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Заблокированный участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}{attachment:ban.png:./src/icons/ban.png}]
 
-$if[$isUserDmEnabled[$get[user]]==true]
+$if[$isUserDmEnabled[$slashOption[user]]==true]
 $sendDM[{newEmbed:{author:Блокировка:attachment://ban.png}{description:Вы были **заблокированы** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$get[reason1]}{timestamp}{color:#2b2d31}}{attachment:ban.png:./src/icons/ban.png}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
 $let[reason1;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];true;Не указана];false;$slashOption[reason]]]
 $endif
