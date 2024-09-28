@@ -2,6 +2,7 @@ const { AoiClient, LoadCommands, CustomEvent } = require("aoi.js");
 const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter } = require("@aoijs/aoi.music");
 const { AoiCanvas } = require("aoi.canvas");
 const config = require("./config.json");
+const functions = require("./src/custom/functions.js");
 
 const client = new AoiClient({
   token: config.token,
@@ -117,7 +118,8 @@ client.variables({
   gender: "",
   nickname_history: "",
   temproles: "",
-  hash: "1c9aea5"
+  hash: "1c9aea5",
+  platform: "youtube"
 });
 
 voice.addPlugin(PluginName.Cacher, new Cacher("memory"));
@@ -135,6 +137,7 @@ loader.load(client.cmd, "./src/commands/", true);
 loader.load(client.cmd, "./src/events/", true);
 loader.load(voice.cmds, "./src/musicEvents/", true);
 
+<<<<<<< Updated upstream
 client.functionManager.createFunction({
   name: "$FormatTime",
   type: "djs",
@@ -173,3 +176,6 @@ client.functionManager.createFunction({
     };
   }
 });
+=======
+functions.forEach((func) => client.functionManager.createFunction(func));
+>>>>>>> Stashed changes
