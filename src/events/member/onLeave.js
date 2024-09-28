@@ -4,15 +4,8 @@ module.exports = [{
   channel: "$getGuildVar[logs;$guildID]",
   $if: "old",
   code: `$if[$isBot[$authorID]==false]
-$description[Участник **$username[$authorID]** (<@$authorID>) покинул сервер]
-$footer[Id участника#COLON# $authorID;$authorAvatar]
-$thumbnail[$authorAvatar]
-$color[#ead967]
-$addTimestamp
+$sendMessage[{newEmbed:{description:Участник **$username[$authorID]** (<@$authorID>) покинул сервер}{footer:Id участника#COLON# $authorID:$authorAvatar}{thumbnail:$authorAvatar}{color:#ead967}{timestamp}}]
 $else
-$description[Бот **$username[$authorID]** (<@$authorID>) удалён с сервера]
-$footer[Id бота#COLON# $authorID;$authorAvatar]
-$color[#ead967]
-$addTimestamp
+$sendMessage[{newEmbed:{description:Бот **$username[$authorID]** (<@$authorID>) удалён с сервера}{footer:Id бота#COLON# $authorID:$authorAvatar}{color:#ead967}{timestamp}}]
 $endif`
 }];

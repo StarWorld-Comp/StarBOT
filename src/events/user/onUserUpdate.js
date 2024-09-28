@@ -26,10 +26,10 @@ $endif
 $if[$newUser[avatar]!=$oldUser[avatar]]
 $sendMessage[{newEmbed:{description:Аватар пользователя **$username** (<@$authorID>) был изменен}
 $if[$newUser[avatar]!=]
-{field:Новый аватар:$newUser[avatar]:true}
+{field:Новый аватар:[Клик](https://cdn.discordapp.com/avatars/$authorID/$newUser[avatar].webp?size=4096):true}{image:https://cdn.discordapp.com/avatars/$authorID/$newUser[avatar].webp?size=4096}
 $endif
 $if[$oldUser[avatar]!=]
-{field:Старый аватар:$oldUser[avatar]:true}
+{field:Старый аватар:[Клик](https://cdn.discordapp.com/avatars/$authorID/$oldUser[avatar].webp?size=4096):true}
 $endif{footer:Id участника#COLON# $authorID:$authorAvatar}{color:#01e5d6}{timestamp}}]
 $endif
 

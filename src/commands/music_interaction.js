@@ -49,8 +49,6 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
         type: "interaction",
         prototype: "button",
         code: `
-$interactionDelete
-$wait[1s]
 $skipTrack
 $onlyIf[$or[$hasPlayer==true;$playerStatus==playing;$playerStatus==pause]==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
      },
@@ -434,12 +432,9 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
         },
         {
           name: "music-settings",
-          type: "interaction",
-          prototype: "slash",
+          type: "default",
           code: `
-$interactionReply[{actionRow:{selectMenu:select-platform:Выберите платформу для музыки:1:1:false:{stringInput:Spotify:spotify::false}{stringInput:SoundCloud:soundcloud::false}{stringInput:YouTube:youtube::false}}}{
-actionRow:{selectMenu:youtube-type:Выберите тип YouTube:1:1:false:{stringInput:Web:WEB::true}{stringInput:Android:ANDROID::true}{stringInput:YTMUSIC:YTMUSIC::true}
-{stringInput:YTMUSIC Andoid:YTMUSIC_ANDROID::true}{stringInput:YT Studio:YTSTUDIO Android::true}{stringInput:TV:TV_EMBEDDED::false}}}]`
+$interactionReply[{actionRow:{selectMenu:select-platform:Выберите платформу.:1:1:false:{stringInput:Spotify:spotify::$replaceText[$replaceText[$replaceText[$getGuildVar[platform;$guildID];youtube;false];soundcloud;false];spotify;true]:1289535267824472094}{stringInput:SoundCloud:soundcloud::$replaceText[$replaceText[$replaceText[$getGuildVar[platform;$guildID];youtube;false];soundcloud;true];spotify;false]:1289535230205755392}{stringInput:YouTube:youtube::$replaceText[$replaceText[$replaceText[$getGuildVar[platform;$guildID];youtube;true];soundcloud;false];spotify;false]:1286673861072523360}}}]`
         },
         {
             name: "update_song",
