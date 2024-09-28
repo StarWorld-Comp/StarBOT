@@ -16,6 +16,20 @@ $sendMessage[{newEmbed:{description:Роли участника **$username** (<
 $endelseif
 $endif
 
+$if[$newMember[avatarUrl]!=$oldMember[avatarUrl]]
+$sendMessage[{newEmbed:{description:Аватар участника **$username** (<@$authorID>) был изменен}
+$if[$newMember[avatarUrl]!=]
+{field:Новый аватар:[Клик]($newMember[avatarUrl]):true}{image:$newMember[avatarUrl]}
+$endif
+$if[$oldMember[avatarUrl]!=]
+{field:Старый аватар:[Клик]($oldMember[avatarUrl]):true}
+$endif{footer:Id участника#COLON# $authorID:$authorAvatar}{color:#01e5d6}{timestamp}}]
+$endif
+
+$if[$newMember[highestRoleID]!=$oldMember[highestRoleID]]
+$sendMessage[{newEmbed:{description:Высшая роль пользователя **$username** (<@$authorID>) была изменена}{field:Новая роль:<@&$newMember[highestRoleID]>:true}{field:Старая роль:<@&$oldMember[highestRoleID]>:true}{footer:Id участника#COLON# $authorID:$authorAvatar}{color:#01e5d6}{timestamp}}]
+$endif
+
 $if[$oldMember[nick]!=$newMember[nick]]
 $sendMessage[{newEmbed:{thumbnail:$authorAvatar}{description:Никнейм участника **$username** (<@$authorID>) был изменен}
 $if[$newMember[nick]!=]
