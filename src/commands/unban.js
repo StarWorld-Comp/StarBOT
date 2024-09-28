@@ -3,10 +3,10 @@ module.exports = [{
   type: "interaction",
   prototype: "slash",
   $if: "old",
-  code: `$interactionEdit[{newEmbed:{author:Разблокировка:attachment://ban.png}{thumbnail:$userAvatar[$get[user]]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Разблокированный участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}{attachment:ban.png:./src/icons/ban.png}]
+  code: `$interactionEdit[{newEmbed:{author:Разблокировка:attachment://unban.png}{thumbnail:$userAvatar[$get[user]]}{field:Модератор:$username (<@$authorID>):true}{field:Причина:$get[reason]:false}{field:Разблокированный участник:$username[$get[user]] (<@$get[user]>):false}{color:#2b2d31}{timestamp}}{attachment:unban.png:./src/icons/unban.png}]
 
 $if[$isUserDmEnabled[$get[user]]==true]
-$sendDM[{newEmbed:{author:Разблокировка:attachment://ban.png}{description:Вы были **разблокированы** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$get[reason]}{timestamp}}{attachment:ban.png:./src/icons/ban.png}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
+$sendDM[{newEmbed:{author:Разблокировка:attachment://unban.png}{description:Вы были **разблокированы** модератором **$username[$authorID]** (<@$authorID>)}{field:Причина:$get[reason]}{timestamp}}{attachment:unban.png:./src/icons/unban.png}{actionRow:{button:Отправлено с $guildName[$guildID]:secondary:guild:true:📨}};$slashOption[user];false]
 $let[reason;$replaceText[$replaceText[$checkCondition[$slashOption[reason]==];true;Не указана];false;$slashOption[reason]]]
 $endif
 $unban[$guildID;$get[user];$slashOption[reason]]
