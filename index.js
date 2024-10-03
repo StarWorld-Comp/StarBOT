@@ -1,6 +1,7 @@
 const { AoiClient, LoadCommands, CustomEvent } = require("aoi.js");
 const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter } = require("@aoijs/aoi.music");
 const { AoiCanvas } = require("aoi.canvas");
+const { Database } = require("aoi.sqlite");
 const config = require("./config.json");
 const functions = require("./src/custom/functions.js");
 
@@ -13,19 +14,24 @@ const client = new AoiClient({
   mobilePlatform: false,
   respondToBots: false,
   guildOnly: false,
-  disableAoiDB: false,
-  database: {
-    type: "aoi.db",
-    db: require("@aoijs/aoi.db"),
-    dbType: "KeyValue",
-    tables: ["main"],
-    securityKey: "55160b21ada0471c9283c552850a3a27",
-  },
-    suppressAllErrors: false,
-    errorMessage: "Fotal Error!",
-    aoiAutoUpdate: false,
-    aoiWarning: true,
-    aoiLogs: true,
+  disableAoiDB: true,
+  suppressAllErrors: false,
+  errorMessage: "Fotal Error!",
+  aoiAutoUpdate: false,
+  aoiWarning: true,
+  aoiLogs: true,
+});
+
+client.on("error", (err) => {
+
+  console.error("Something Broke!", err);
+
+});
+
+new Database(client, {
+  location: "./database/database.db",
+  tables: ["main", "applications", "eco", "ticket", "music"],
+  logging: true,
 });
 
 const canvas = new AoiCanvas(client);
@@ -74,42 +80,9 @@ client.variables({
   level: "1",
   xp: "0",
   logs: "1242150721369931847",
-  tickets_open: "0",
-  tickets: "0",
-  ticket_close_status: "false",
-  ticket_user: "none",
-  cash: "0",
-  bank: "0",
-  user: "",
-  document: "none",
-  fio: "",
-  bio: "",
-  vk: "none",
-  years: "none",
-  version: "5.0.5-DEV",
+  version: "5.0.6",
   warns: "0",
-  app_helper: "on",
-  mustitle: "none",
-  app_yt: "off",
-  app_tiktok: "off",
-  app_technical: "off",
-  app_streamer: "off",
-  music_msg: "0",
-  thumbnail: "none",
-  author: "",
-  duration: "",
-  requester: "",
-  url: "",
-  status: "",
-  status_mus: "none",
-  page: "",
   nextLevelXP: "200",
-  thiefs: "0",
-  success_thiefs: "0",
-  fail_thiefs: "0",
-  jail_thiefs: "0",
-  jail_status: "false",
-  balance: "0",
   messages: "0",
   voice: "0",
   xpMulti: "1.5",
@@ -119,8 +92,53 @@ client.variables({
   nickname_history: "",
   temproles: "",
   hash: "1c9aea5",
-  platform: "youtube"
-});
+}, "main");
+
+client.variables({
+  tickets_open: "0",
+  tickets: "0",
+  ticket_close_status: "false",
+  ticket_user: "none"
+}, "ticket");
+
+client.variables({
+  cash: "0",
+  bank: "0",
+  balance: "0",
+  thiefs: "0",
+  success_thiefs: "0",
+  fail_thiefs: "0",
+  jail_thiefs: "0",
+  jail_status: "false"
+}, "eco");
+
+client.variables({
+  user: "",
+  document: "none",
+  fio: "",
+  bio: "",
+  vk: "none",
+  years: "none",
+  app_helper: "on",
+  app_yt: "off",
+  app_tiktok: "off",
+  app_technical: "off",
+  app_streamer: "off"
+}, "applications");
+
+client.variables({
+  mustitle: "",
+  music_msg: "0",
+  thumbnail: "",
+  author: "",
+  duration: "",
+  requester: "",
+  url: "",
+  status: "",
+  status_mus: "none",
+  platform: "youtube",
+  page: "",
+}, "music");
 
 voice.addPlugin(PluginName.Cacher, new Cacher("memory"));
 voice.addPlugin(PluginName.Filter, new Filter({
@@ -135,6 +153,6 @@ voice.addEvent(PlayerEvents.QueueEnd);
 voice.addEvent(PlayerEvents.AudioError);
 loader.load(client.cmd, "./src/commands/", true);
 loader.load(client.cmd, "./src/events/", true);
-loader.load(voice.cmds, "./src/musicEvents/", true);
+loader.load(voice.cmds, "./src/custom/events/music/", true);
 
 functions.forEach((func) => client.functionManager.createFunction(func));
