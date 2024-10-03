@@ -4,59 +4,47 @@ module.exports = [{
   channel: "$getGuildVar[logs;$guildID]",
   $if: "old",
   code: `$if[$oldChannel[type]==0]
-$description[Удалён текстовой канал]
-$addField[Название;**$oldChannel[name]** (<#$oldChannel[id]>);false]
+$sendMessage[{newEmbed:{description:Удалён текстовой канал}{field:Название:**$oldChannel[name]** (<#$oldChannel[id]>):true}
 $if[$oldChannel[parentName]!=]
-$addField[Категория;**$oldChannel[parentName]**;false]
+{field:Категория:**$oldChannel[parentName]**:true}
 $endif
-$footer[Id канала#COLON# $oldChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $oldChannel[id]:$guildIcon}{color:Red}{timestamp}}]
 
 $elseif[$oldChannel[type]==2]
-$description[Удалён голосовой канал]
-$addField[Название;**$oldChannel[name]** (<#$oldChannel[id]>);false]
+$sendMessage[{newEmbed:{description:Удалён голосовой канал}{field:Название:**$oldChannel[name]** (<#$oldChannel[id]>):true}
 $if[$oldChannel[parentName]!=]
-$addField[Категория;**$oldChannel[parentName]**;false]
+{field:Категория:**$oldChannel[parentName]**:true}
 $endif
-$footer[Id канала#COLON# $oldChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $oldChannel[id]:$guildIcon}{color:Red}{timestamp}}]
 $endelseif
 
 $elseif[$oldChannel[type]==4]
-$description[Удалена категория]
-$addField[Название;**$oldChannel[name]**;false]
-$footer[Id категории#COLON# $oldChannel[id]]
-$addTimestamp
+$sendMessage[{newEmbed:{description:Удалёна категория}{field:Название:**$oldChannel[name]** (<#$oldChannel[id]>):true}
+{footer:Id категории#COLON# $oldChannel[id]:$guildIcon}{color:Red}{timestamp}}]
 $endelseif
 
 $elseif[$oldChannel[type]==15]
-$description[Удалён форум]
+$sendMessage[{newEmbed:{description:Удалён форум}{field:Название:**$oldChannel[name]** (<#$oldChannel[id]>):true}
 $if[$oldChannel[parentName]!=]
-$addField[Категория;**$oldChannel[parentName]**;false]
+{field:Категория:**$oldChannel[parentName]**:true}
 $endif
-$addField[Название;**$oldChannel[name]** (<#$oldChannel[id]>);false]
-$footer[Id форума#COLON# $oldChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $oldChannel[id]:$guildIcon}{color:Red}{timestamp}}]
 $endelseif
 
 $elseif[$oldChannel[type]==5]
-$description[Удалён канал объявлений]
+$sendMessage[{newEmbed:{description:Удалён канал обьявлений}{field:Название:**$oldChannel[name]** (<#$oldChannel[id]>):true}
 $if[$oldChannel[parentName]!=]
-$addField[Категория;**$oldChannel[parentName]**;false]
+{field:Категория:**$oldChannel[parentName]**:true}
 $endif
-$addField[Название;**$oldChannel[name]** (<#$oldChannel[id]>);false]
-$footer[Id канала#COLON# $oldChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $oldChannel[id]:$guildIcon}{color:Red}{timestamp}}]
 $endelseif
 
 $elseif[$oldChannel[type]==13]
-$description[Удалена трибуна]
+$sendMessage[{newEmbed:{description:Удалена трибуна}{field:Название:**$oldChannel[name]** (<#$oldChannel[id]>):true}
 $if[$oldChannel[parentName]!=]
-$addField[Категория;**$oldChannel[parentName]**;false]
+{field:Категория:**$oldChannel[parentName]**:true}
 $endif
-$addField[Название;**$oldChannel[name]** (<#$oldChannel[id]>);false]
-$footer[Id трибуны#COLON# $oldChannel[id]]
-$addTimestamp
+{footer:Id трибуны#COLON# $oldChannel[id]:$guildIcon}{color:Red}{timestamp}}]
 $endelseif
 $endif`
 }];

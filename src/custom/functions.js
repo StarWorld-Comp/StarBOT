@@ -66,4 +66,33 @@ module.exports = [{
         code: d.util.setCode(data),
       };
     }
-  }];
+},{
+      name: "$guildBoosters",
+      type: "djs",
+      code: async function (d) {
+  let data = d.util.aoiFunc(d);
+  let [option = 'id', sep = ', '] = data.inside.splits;
+
+  const guild = await d.util.getGuild(d, d.guild?.id);
+  const boosters = guild.members.cache.filter(member => member.premiumSince !== null);
+
+  data.result = boosters.map(x => option === 'mention' ? x.toString() : x[option]).join(sep);
+
+  return {
+    code: d.util.setCode(data)
+  };
+}
+},{
+    name: "$isCaps",
+    type: "djs",
+    code: async (d) => {
+        const data = d.util.aoiFunc(d);
+        const [percentage, message] = data.inside.splits;
+        const capsPercentage = (message.replace(/[^A-Z-А-Я]/g, "").length / message.length) * 100;
+        const isCaps = capsPercentage >= parseFloat(percentage);
+        data.result = isCaps;
+        return {
+            code: d.util.setCode(data)
+        };
+    }
+}];

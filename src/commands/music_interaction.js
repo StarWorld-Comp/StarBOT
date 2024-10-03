@@ -7,7 +7,7 @@ module.exports = [
 $clearQueue
 $stopTrack
 $leaveVC
-$setMessageVar[status_mus;stop;$getGuildVar[music_msg]]
+$setMessageVar[status_mus;stop;$getGuildVar[music_msg;$guildID;music];music]
 $interactionUpdate[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:$songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}{field:Статус:Остановлено ($replaceText[$digitalFormat[$songInfo[duration]];00:;;1]) — $songInfo[requester.user.username]:false}{timestamp}{color:#2e3d9f}}{newEmbed:{title:Остановлено}{description:<@$authorID> принудительно остановил очередь сервера.}{color:#2e3d9f}}]
 
 $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
@@ -50,7 +50,7 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
         prototype: "button",
         code: `
 $skipTrack
-$onlyIf[$or[$hasPlayer==true;$playerStatus==playing;$playerStatus==pause]==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
+$onlyIf[$hasPlayer==true||$playerStatus==playing||$playerStatus==paused;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
      },
      {
          name: "resume",
@@ -185,7 +185,7 @@ $endif}
 {button::secondary:queue:false:1273156315212025877}}]
 $volume[$sum[$volume[get];10]]
 $onlyIf[$volume[get]<100;{newEmbed:{color:#f1090b}{description:Громкость уже установлена на максимум.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
-$onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
+$onlyIf[$playerStatus==playing&&$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
          },
          {
            name: "loop",
@@ -280,7 +280,7 @@ $endif}
 {button::secondary:-volume:false:1265938464180797481}{button::secondary:+volume:false:1265939201300631573}
 {button::secondary:queue:false:1273156315212025877}}]
 $seek[15000]
-$onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
+$onlyIf[$playerStatus==playing&&$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
          },
          {
            name: "previous",
@@ -371,7 +371,7 @@ $resetFilter
 $endelseif
 $endif
 
-$onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1090b}{description:На данный момент нечего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
+$onlyIf[$playerStatus==playing&&$hasPlayer==true;{newEmbed:{color:#f1090b}{description:На данный момент нечего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
         },
         {
           name: "seek",
@@ -381,7 +381,7 @@ $onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1
           code: `
 $interactionReply[<:success:1275672606862741556>;;true]
 $seek[$slashOption[position]]
-$onlyIf[$and[$playerStatus==playing;$hasPlayer==true]==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
+$onlyIf[$playerStatus==playing&&$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящее время ничего не воспроизводится.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]`
         },
         {
           name: "autoplay",
@@ -441,7 +441,7 @@ $interactionReply[{actionRow:{selectMenu:select-platform:Выберите пла
             type: "awaited",
             $if: "old",
             code: `
-$if[$and[$hasPlayer==true;$playerStatus==playing;$getGuildVar[music_msg]==$awaitData[msgID]]==true]
+$if[$hasPlayer==true&&$playerStatus==playing&&$getGuildVar[music_msg]==$awaitData[msgID]]
 $editMessage[$awaitData[msgID];{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{thumbnail:$songInfo[thumbnail]}{url:$songInfo[url]}{field:Продолжительность:<\:pause\:1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<\:volumeadd\:1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
 {field:Режим повтора:$replaceText[$replaceText[$loopStatus;queue;<\:loop\:1265939089086091265> Очередь];song;<\:loop1\:1273953475918692402> Текущий трек]:true}
@@ -527,13 +527,13 @@ $onlyIf[$messageExists[$awaitData[msgID];$awaitData[channelID]]==true]`
           prototype: "slash",
           $if: "old",
           code: `
-$setMessageVar[page;1;$get[id]]
+$setMessageVar[page;1;$get[id];music]
 $let[id;$interactionReply[{newEmbed:{author:Очередь сервера $guildName:$guildIcon}{description:$replaceText[$queue[1;10;{position}. {title} • \`\[{digitalFormat}\]\`;\n];0.;1.]}{field:Сейчас играет:$songInfo[title] • \`\[$digitalFormat[$songInfo[duration]]\]\`}{field:Продолжительность музыкальной очереди:
 $if[$queueLength==1]
 $digitalFormat[$songInfo[duration]]
 $else
 $digitalFormat[$math[$queue[1;$queueLength;{duration};+]-$songInfo[duration]]]
-$endif}{field:Всего музыкальных произведений:$queueLength:true}{field:Громкость плеера:$volume[get]%:true}{footer:Страница#COLON# $getMessageVar[page]/$ceil[$math[($ceil[$queueLength]-1)/10]]}{color:#2b2d31}{timestamp}}{actionRow:{button::secondary:back_page_slash:true:1274377982659530792}
+$endif}{field:Всего музыкальных произведений:$queueLength:true}{field:Громкость плеера:$volume[get]%:true}{footer:Страница#COLON# $getMessageVar[page;$messageID;music]/$ceil[$math[($ceil[$queueLength]-1)/10]]}{color:#2b2d31}{timestamp}}{actionRow:{button::secondary:back_page_slash:true:1274377982659530792}
 $if[$queueLength<=10]
 {button::secondary:next_page_slash:true:1274377826216444058}
 $else
@@ -550,18 +550,18 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
           prototype: "button",
           $if: "old",
           code: `
-$interactionUpdate[{newEmbed:{title:Очередь сервера $guildName}{thumbnail:$guildIcon}{description:$queue[$getMessageVar[page];10;\[ **#{position}** \] \`\[ {digitalFormat} \]\` [{title}]({url});\n]}{color:#2e3d9f}{timestamp}}{actionRow:
-$if[1==$getMessageVar[page]]
+$interactionUpdate[{newEmbed:{title:Очередь сервера $guildName}{thumbnail:$guildIcon}{description:$queue[$getMessageVar[page;$messageID;music];10;\[ **#{position}** \] \`\[ {digitalFormat} \]\` [{title}]({url});\n]}{color:#2e3d9f}{timestamp}}{actionRow:
+$if[1==$getMessageVar[page;$messageID;music]]
 {button::secondary:back_page_embed:false:1274377982659530792}
 $else
 {button::secondary:back_page_embed:true:1274377982659530792}
 $endif
-$if[$getMessageVar[page]0<=$queueLength]
+$if[$getMessageVar[page;$messageID;music]0<=$queueLength]
 {button::secondary:next_page_embed:true:1274377826216444058}
 $else
 {button::secondary:next_page_embed:false:1274377826216444058}
 $endif}]
-$setMessageVar[page;$sum[$getMessageVar[page];1];$interactionData[message.id]]
+$setMessageVar[page;$sum[$getMessageVar[page;$messageID;music];1];$interactionData[message.id];music]
 $suppressErrors`
         },
         {
@@ -570,18 +570,18 @@ $suppressErrors`
           prototype: "button",
           $if: "old",
           code: `
-$interactionUpdate[{newEmbed:{title:Очередь сервера $guildName}{thumbnail:$guildIcon}{description:$queue[$getMessageVar[page];10;\[ **#{position}** \] \`\[ {digitalFormat} \]\` [{title}]({url});\n]}{color:#2e3d9f}{timestamp}}{actionRow:
-$if[1==$getMessageVar[page]]
+$interactionUpdate[{newEmbed:{title:Очередь сервера $guildName}{thumbnail:$guildIcon}{description:$queue[$getMessageVar[page;$messageID;music];10;\[ **#{position}** \] \`\[ {digitalFormat} \]\` [{title}]({url});\n]}{color:#2e3d9f}{timestamp}}{actionRow:
+$if[1==$getMessageVar[page;$messageID;music]]
 {button::secondary:back_page_embed:false:1274377982659530792}
 $else
 {button::secondary:back_page_embed:true:1274377982659530792}
 $endif
-$if[$getMessageVar[page]0<=$queueLength]
+$if[$getMessageVar[page;$messageID;music]0<=$queueLength]
 {button::secondary:next_page_embed:true:1274377826216444058}
 $else
 {button::secondary:next_page_embed:false:1274377826216444058}
 $endif}]
-$setMessageVar[page;$sub[$getMessageVar[page];1];$interactionData[message.id]]
+$setMessageVar[page;$sub[$getMessageVar[page;$messageID;music];1];$interactionData[message.id];music]
 $suppressErrors`
         },
         {
@@ -590,24 +590,24 @@ $suppressErrors`
           prototype: "button",
           $if: "old",
           code: `
-$interactionUpdate[{newEmbed:{author:Очередь сервера $guildName:$guildIcon}{description:$replaceText[$queue[$getMessageVar[page];10;{position}. {title} • \`\[{digitalFormat}\]\`;\n];0.;1.]}{field:Сейчас играет:$songInfo[title] • \`\[$digitalFormat[$songInfo[duration]]\]\`}{field:Продолжительность музыкальной очереди:
+$interactionUpdate[{newEmbed:{author:Очередь сервера $guildName:$guildIcon}{description:$replaceText[$queue[$getMessageVar[page;$messageID;music];10;{position}. {title} • \`\[{digitalFormat}\]\`;\n];0.;1.]}{field:Сейчас играет:$songInfo[title] • \`\[$digitalFormat[$songInfo[duration]]\]\`}{field:Продолжительность музыкальной очереди:
 $if[$queueLength==1]
 $digitalFormat[$songInfo[duration]]
 $else
 $queue[1;$queueLength;{duration};#SEMI#]
-$endif}{field:Всего музыкальных произведений:$queueLength:true}{field:Громкость плеера:$volume[get]%:true}{footer:Страница#COLON# $getMessageVar[page]/$ceil[$math[($ceil[$queueLength]-1)/10]]}{color:#2e3d9f}{timestamp}}{actionRow:
-$if[$getMessageVar[page]<=1]
+$endif}{field:Всего музыкальных произведений:$queueLength:true}{field:Громкость плеера:$volume[get]%:true}{footer:Страница#COLON# $getMessageVar[page;$messageID;music]/$ceil[$math[($ceil[$queueLength]-1)/10]]}{color:#2e3d9f}{timestamp}}{actionRow:
+$if[$getMessageVar[page;$messageID;music]<=1]
 {button::secondary:back_page_slash:true:1274377982659530792}
 $else
 {button::secondary:back_page_slash:false:1274377982659530792}
 $endif
-$if[$queueLength<=$getMessageVar[page]0]
+$if[$queueLength<=$getMessageVar[page;$messageID;music]0]
 {button::secondary:next_page_slash:true:1274377826216444058}
 $else
 {button::secondary:next_page_slash:false:1274377826216444058}
 $endif
 {button::secondary:delete:false:1276107115425169461}};;true]
-$setMessageVar[page;$sum[$getMessageVar[page];1];$interactionData[message.id]]
+$setMessageVar[page;$sum[$getMessageVar[page;$messageID;music];1];$interactionData[message.id];music]
 $suppressErrors`
         },
         {
@@ -615,24 +615,24 @@ $suppressErrors`
           type: "interaction",
           prototype: "button",
           code: `
-$interactionUpdate[{newEmbed:{author:Очередь сервера $guildName:$guildIcon}{description:$replaceText[$queue[$getMessageVar[page];10;{position}. {title} • \`\[{digitalFormat}\]\`;\n];0.;1.]}{field:Сейчас играет:$songInfo[title] • \`\[$digitalFormat[$songInfo[duration]]\]\`}{field:Продолжительность музыкальной очереди:
+$interactionUpdate[{newEmbed:{author:Очередь сервера $guildName:$guildIcon}{description:$replaceText[$queue[$getMessageVar[page;$messageID;music];10;{position}. {title} • \`\[{digitalFormat}\]\`;\n];0.;1.]}{field:Сейчас играет:$songInfo[title] • \`\[$digitalFormat[$songInfo[duration]]\]\`}{field:Продолжительность музыкальной очереди:
 $if[$queueLength==1]
 $digitalFormat[$songInfo[duration]]
 $else
 $queue[1;$queueLength;{duration};#SEMI#]
-$endif}{field:Всего музыкальных произведений:$queueLength:true}{field:Громкость плеера:$volume[get]%:true}{footer:Страница#COLON# $getMessageVar[page]/$ceil[$math[($ceil[$queueLength]-1)/10]]}{color:#2e3d9f}{timestamp}}{actionRow:
-$if[$getMessageVar[page]<=1]
+$endif}{field:Всего музыкальных произведений:$queueLength:true}{field:Громкость плеера:$volume[get]%:true}{footer:Страница#COLON# $getMessageVar[page;$messageID;music]/$ceil[$math[($ceil[$queueLength]-1)/10]]}{color:#2e3d9f}{timestamp}}{actionRow:
+$if[$getMessageVar[page;$messageID;music]<=1]
 {button::secondary:back_page_slash:true:1274377982659530792}
 $else
 {button::secondary:back_page_slash:false:1274377982659530792}
 $endif
-$if[$queueLength<=$getMessageVar[page]0]
+$if[$queueLength<=$getMessageVar[page;$messageID;music]0]
 {button::secondary:next_page_slash:true:1274377826216444058}
 $else
 {button::secondary:next_page_slash:false:1274377826216444058}
 $endif
 {button::secondary:delete:false:1276107115425169461}};;true]
-$setMessageVar[page;$sub[$getMessageVar[page];1];$interactionData[message.id]]
+$setMessageVar[page;$sub[$getMessageVar[page;$messageID;music];1];$interactionData[message.id];music]
 $suppressErrors`
         },
         {

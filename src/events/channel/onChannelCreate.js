@@ -4,59 +4,46 @@ module.exports = [{
   channel: "$getGuildVar[logs;$guildID]",
   $if: "old",
   code: `$if[$newChannel[type]==0]
-$description[Создан новый текстовой канал]
-$addField[Название;**$newChannel[name]** (<#$newChannel[id]>);true]
+$sendMessage[{newEmbed:{description:Создан новый текстовой канал}{field:Название:**$newChannel[name]** (<#$newChannel[id]>):true}
 $if[$newChannel[parentName]!=]
-$addField[Категория;**$newChannel[parentName]**;true]
+{field:Категория:**$newChannel[parentName]**:true}
 $endif
-$footer[Id канала#COLON# $newChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $newChannel[id]:$guildIcon}{color:Green}{timestamp}}]
 
 $elseif[$newChannel[type]==2]
-$description[Создан новый голосовой канал]
-$addField[Название;**$newChannel[name]** (<#$newChannel[id]>);true]
+$sendMessage[{newEmbed:{description:Создан новый голосовой канал}{field:Название:**$newChannel[name]** (<#$newChannel[id]>):true}
 $if[$newChannel[parentName]!=]
-$addField[Категория;**$newChannel[parentName]**;true]
+{field:Категория:**$newChannel[parentName]**:true}
 $endif
-$footer[Id канала#COLON# $newChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $newChannel[id]:$guildIcon}{color:Green}{timestamp}}]
 $endelseif
 
 $elseif[$newChannel[type]==4]
-$description[Создана новая категория]
-$addField[Название;**$newChannel[name]**;false]
-$footer[Id категории#COLON# $newChannel[id]]
-$addTimestamp
+$sendMessage[{newEmbed:{description:Создана новая категория}{field:Название:**$newChannel[name]**:true}{footer:Id категории#COLON# $newChannel[id]}{timestamp}}]
 $endelseif
 
 $elseif[$newChannel[type]==15]
-$description[Создан новый форум]
+$sendMessage[{newEmbed:{description:Создан новый форум}{field:Название:**$newChannel[name]** (<#$newChannel[id]>):true}
 $if[$newChannel[parentName]!=]
-$addField[Категория;**$newChannel[parentName]**;true]
+{field:Категория:**$newChannel[parentName]**:true}
 $endif
-$addField[Название;**$newChannel[name]** (<#$newChannel[id]>);true]
-$footer[Id форума#COLON# $newChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $newChannel[id]:$guildIcon}{color:Green}{timestamp}}]
 $endelseif
 
 $elseif[$newChannel[type]==5]
-$description[Создан новый канал объявлений]
+$sendMessage[{newEmbed:{description:Создан новый канал обьявлений}{field:Название:**$newChannel[name]** (<#$newChannel[id]>):true}
 $if[$newChannel[parentName]!=]
-$addField[Категория;**$newChannel[parentName]**;false]
+{field:Категория:**$newChannel[parentName]**:true}
 $endif
-$addField[Название;**$newChannel[name]** (<#$newChannel[id]>);false]
-$footer[Id канала#COLON# $newChannel[id]]
-$addTimestamp
+{footer:Id канала#COLON# $newChannel[id]:$guildIcon}{color:Green}{timestamp}}]
 $endelseif
 
 $elseif[$newChannel[type]==13]
-$description[Создана новая трибуна]
+$sendMessage[{newEmbed:{description:Создана новая трибуна}{field:Название:**$newChannel[name]** (<#$newChannel[id]>):true}
 $if[$newChannel[parentName]!=]
-$addField[Категория;**$newChannel[parentName]**;false]
+{field:Категория:**$newChannel[parentName]**:true}
 $endif
-$addField[Название;**$newChannel[name]** (<#$newChannel[id]>);false]
-$footer[Id трибуны#COLON# $newChannel[id]]
-$addTimestamp
+{footer:Id трибуны#COLON# $newChannel[id]:$guildIcon}{color:Green}{timestamp}}]
 $endelseif
 $endif`
 }];

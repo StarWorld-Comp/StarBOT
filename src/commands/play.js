@@ -23,7 +23,7 @@ $if[$hasPlayer==false]
 $joinVC[$voiceID[$authorID];true;false;true;default]
 $endif
 $if[$playerStatus==idle]
-$editMessage[$getGuildVar[music_msg;$guildID];{newEmbed:{author:$getGuildVar[author;$guildID]:$getGuildVar[thumbnail;$guildID]}{title:$getGuildVar[title;$guildID]}{url:$getGuildVar[url;$guildID]}{thumbnail:$getGuildVar[thumbnail;$guildID]}{field:Статус:Прослушано ($digitalFormat[$getGuildVar[duration;$guildID]]) — $getGuildVar[requester;$guildID]:false}{timestamp}{color:#2e3d9f}};$channelID]
+$editMessage[$getGuildVar[music_msg;$guildID;music];{newEmbed:{author:$getGuildVar[author;$guildID;music]:$getGuildVar[thumbnail;$guildID;music]}{title:$getGuildVar[title;$guildID;music]}{url:$getGuildVar[url;$guildID;music]}{thumbnail:$getGuildVar[thumbnail;$guildID;music]}{field:Статус:Прослушано ($digitalFormat[$getGuildVar[duration;$guildID;music]]) — $getGuildVar[requester;$guildID;music]:false}{timestamp}{color:#2e3d9f}};$channelID]
 $clearQueue
 $stopTrack
 $suppressErrors

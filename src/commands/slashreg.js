@@ -1,6 +1,6 @@
 module.exports = [{
     name: "slashreg",
-    type: "ready",
+    type: "default",
     channel: "",
     code:
     `

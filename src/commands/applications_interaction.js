@@ -17,7 +17,7 @@ $interactionModal[Заявка на Хелпера;helper_appmodal;
     {textInput:ФИО:1:fio:true:Столбников Иван Петрович:1:100}
   }
   {actionRow:
-    {textInput:Возраст:1:years:true:15:1:2}
+    {textInput:Возраст:1:age:true:15:1:2}
   }
   {actionRow:
     {textInput:ВКонтакте:1:vk_url:true:https#COLON#//vk.com/arseniy:10:150}
@@ -31,7 +31,7 @@ $interactionModal[Заявка на Хелпера;helper_appmodal;
 
 $onlyIf[$isUserDmEnabled[$authorID]==true;{newEmbed:{color:#f1090b}{description:Перед подачей заявки включите личные сообщения от участников сервера в настройках.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
-$onlyIf[$getGuildVar[app_helper]==on;{newEmbed:{color:#f1090b}{description:Подача заявок на эту должность временно недоступно, либо заявка закрыта.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyIf[$getGuildVar[app_helper;applications]==on;{newEmbed:{color:#f1090b}{description:Подача заявок на эту должность временно недоступно, либо заявка закрыта.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
 $onlyIf[$getCooldownTime[28d;user;helper_appmodal;$authorID]==0;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[28d;user;helper_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
@@ -48,7 +48,7 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
     {textInput:ФИО:1:fio:true:Столбников Иван Петрович:1:100}
   }
   {actionRow:
-    {textInput:Возраст:1:years:true:15:1:2}
+    {textInput:Возраст:1:age:true:15:1:2}
   }
   {actionRow:
     {textInput:Ютуб канал:1:yt_url:true:https#COLON#//youtube.com/example:10:150}
@@ -63,7 +63,7 @@ $if[$hasPerms[$guildID;$authorID;administrator]!=true]
 $cooldown[28d;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[28d;user;yt_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $endif
 $onlyIf[$isUserDmEnabled[$authorID]==true;{newEmbed:{color:#f1090b}{description:Перед подачей заявки включите личные сообщения от участников сервера в настройках.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
-$onlyIf[$getGuildVar[app_yt]==on;{newEmbed:{color:#f1090b}{description:Подача заявок на эту должность временно недоступно, либо заявка закрыта.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyIf[$getGuildVar[app_yt;applications]==on;{newEmbed:{color:#f1090b}{description:Подача заявок на эту должность временно недоступно, либо заявка закрыта.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $suppressErrors[{newEmbed:{color:#f1090b}{description:Не удалось обработать запрос, возможно в системе заявок проходят технические работы, либо произошла критическая ошибка.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/1244579676584935465/776404508515368972.png?ex=6655a0a6&is=66544f26&hm=a068d0186245402f33b93a145dc53178d854e0b9eeec437571f0110a56038c59&]`
      },

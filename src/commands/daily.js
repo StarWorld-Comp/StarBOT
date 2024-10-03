@@ -3,9 +3,9 @@ module.exports = [{
   type: "interaction",
   prototype: "slash",
   code: `$interactionReply[{newEmbed:{author:Ежедневный бонус:attachment://bonus.png}{thumbnail:$authorAvatar}{description:**$username[$authorID]**, вы забрали свои **1 000** <#COLON#cheap#COLON#1275714873677975553>.}{field:Следующий бонус можно забрать#COLON#:<t#COLON#$truncate[$sum[$math[$datestamp/1000];46800]]#COLON#R>:false}{color:#2b2d31}{footer:$guildName:$guildIcon}{timestamp}}{attachment:bonus.png:./src/icons/bonus.png}]
-$setUserVar[balance;$sum[$getUserVar[cash;$authorID];$getUserVar[bank;$authorID]];$authorID;$guildID;main]
 
-$setUserVar[cash;$sum[$getUserVar[cash;$authorID;$guildID;main];1000];$authorID;$guildID;main]
+$setUserVar[balance;$sum[$getUserVar[cash;$authorID;$guildID;eco];$getUserVar[bank;$authorID;$guildID;eco]];$authorID;$guildID;eco]
+$setUserVar[cash;$sum[$getUserVar[cash;$authorID;$guildID;eco];1000];$authorID;$guildID;eco]
 
 
 $cooldown[13h;{newEmbed:{color:#f1090b}{description:Вы уже забирали ежедневный бонус. попробуйте

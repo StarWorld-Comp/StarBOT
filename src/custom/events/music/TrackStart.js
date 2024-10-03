@@ -4,13 +4,13 @@ module.exports = [{
     type: "trackStart",
     $if: "old",
     code: `
-$setMessageVar[duration;$songInfo[duration];$getGuildVar[music_msg;$guildID]]
-$setMessageVar[url;$songInfo[url];$getGuildVar[music_msg;$guildID]]
-$setMessageVar[author;$songInfo[artist];$getGuildVar[music_msg;$guildID]]
-$setMessageVar[requester;$songInfo[requester.user.username];$getGuildVar[music_msg;$guildID]]
-$setMessageVar[thumbnail;$songInfo[thumbnail];$getGuildVar[music_msg;$guildID]]
-$setMessageVar[mustitle;$songInfo[title];$getGuildVar[music_msg;$guildID]]
-$setGuildVar[music_msg;$get[music_msg];$guildID]
+$setMessageVar[duration;$songInfo[duration];$getGuildVar[music_msg;$guildID;music];music]
+$setMessageVar[url;$songInfo[url];$getGuildVar[music_msg;$guildID;music];music]
+$setMessageVar[author;$songInfo[artist];$getGuildVar[music_msg;$guildID;music];music]
+$setMessageVar[requester;$songInfo[requester.user.username];$getGuildVar[music_msg;$guildID;music];music]
+$setMessageVar[thumbnail;$songInfo[thumbnail];$getGuildVar[music_msg;$guildID;music];music]
+$setMessageVar[mustitle;$songInfo[title];$getGuildVar[music_msg;$guildID;music];music]
+$setGuildVar[music_msg;$get[music_msg];$guildID;music]
 $let[music_msg;$sendMessage[{newEmbed:{author:$songInfo[artist]:$songInfo[thumbnail]}{title:<#COLON#YouTube#COLON#1286673861072523360> $songInfo[title]}{url:$songInfo[url]}{thumbnail:$songInfo[thumbnail]}
 {field:Продолжительность:<#COLON#pause#COLON#1265939040834949161> $progressBar[<:start1:1288104034200195164>;<:start:1288101548483678268>;<:fullmiddle:1288102012117844088>;<:middle10:1288101627127140352>;<:end1:1288103987169595505>;<:end:1288101993688076330>;$getCurrentTrackDuration;$songInfo[duration];10] \`$digitalFormat[$getCurrentTrackDuration] / $digitalFormat[$songInfo[duration]]\`:false}{field:Громкость:<#COLON#volumeadd#COLON#1265939201300631573> $volume[get]%:true}
 $if[$loopStatus!=none]
