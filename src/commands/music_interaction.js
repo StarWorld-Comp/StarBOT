@@ -419,7 +419,7 @@ $onlyIf[$hasPlayer==true;{newEmbed:{color:#f1090b}{description:В настоящ
           prototype: "button",
           $if: "old",
           code: `
-$setMessageVar[page;1;$get[id]]
+$setMessageVar[page;1;$get[id];music]
 $let[id;$interactionReply[{newEmbed:{title:Очередь сервера $guildName}{thumbnail:$guildIcon}{description:$removeContains[$queue[1;10;\[ **#{position}** \] \`\[ {digitalFormat} \]\` [{title}]({url});\n];\[ #0 \]]}{color:#2e3d9f}{timestamp}}{actionRow:{button::secondary:back_page_embed:true:1274377982659530792}
 $if[$or[$ceil[$math[($ceil[$queueLength]-1)/10]]==$getMessageVar[page];$queueLength<=10]==true]
 {button::secondary:next_page_embed:true:1274377826216444058}

@@ -9,6 +9,6 @@ $setUserVar[cash;$sum[$getUserVar[cash;$authorID;$guildID;eco];1000];$authorID;$
 
 
 $cooldown[13h;{newEmbed:{color:#f1090b}{description:Вы уже забирали ежедневный бонус. попробуйте
-<t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[13h;user;daily;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
+<t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[user;daily;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:attachment://error.png}{timestamp}}{ephemeral}{interaction}{attachment:error.png:./src/icons/error.png}]
 `
 }];

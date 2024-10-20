@@ -33,7 +33,7 @@ $onlyIf[$isUserDmEnabled[$authorID]==true;{newEmbed:{color:#f1090b}{description:
 
 $onlyIf[$getGuildVar[app_helper;applications]==on;{newEmbed:{color:#f1090b}{description:Подача заявок на эту должность временно недоступно, либо заявка закрыта.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
-$onlyIf[$getCooldownTime[28d;user;helper_appmodal;$authorID]==0;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[28d;user;helper_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$onlyIf[$getCooldownTime[user;helper_appmodal;$authorID]==0;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[28d;user;helper_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
 $suppressErrors[{newEmbed:{color:#f1090b}{description:Не удалось обработать запрос, возможно в системе заявок проходят технические работы, либо произошла критическая ошибка.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 
@@ -60,7 +60,7 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
     {textInput:О вас:2:bio:true:Я тру Сигма, люблю играть на этом замечательном проекте.:20:1000}
   }]
 $if[$hasPerms[$guildID;$authorID;administrator]!=true]
-$cooldown[28d;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[28d;user;yt_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$cooldown[28d;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[user;yt_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $endif
 $onlyIf[$isUserDmEnabled[$authorID]==true;{newEmbed:{color:#f1090b}{description:Перед подачей заявки включите личные сообщения от участников сервера в настройках.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $onlyIf[$getGuildVar[app_yt;applications]==on;{newEmbed:{color:#f1090b}{description:Подача заявок на эту должность временно недоступно, либо заявка закрыта.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
@@ -89,7 +89,7 @@ $let[error.icon;https://cdn.discordapp.com/attachments/1162658570609901641/12445
   }]
 
 $if[$hasPerms[$guildID;$authorID;administrator]!=true]
-$cooldown[28d;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[28d;user;tiktok_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
+$cooldown[28d;{newEmbed:{color:#f1090b}{description:Вы уже подавали заявку на эту должность в этом месяце, попробуйте снова <t#COLON#$truncate[$sum[$math[$datestamp/1000];$math[$getCooldownTime[user;tiktok_appmodal;$authorID]/1000]]]#COLON#R>.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
 $endif
 
 $onlyIf[$isUserDmEnabled[$authorID]==true;{newEmbed:{color:#f1090b}{description:Перед подачей заявки включите личные сообщения от участников сервера в настройках.}{author:Ошибка:$get[error.icon]}{timestamp}}{ephemeral}{interaction}]
